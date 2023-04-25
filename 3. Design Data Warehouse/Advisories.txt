@@ -1,0 +1,1161 @@
+Advisory File Created 02 Mar 08:21:52 AM
+
+<Level=0><Information> Reverse Engineer
+<Level=1><Error> RES-1: Syntax Error - Line 568, Offset 3 population
+     ( state_key                int not null identity(1,1)
+     , state_code               varchar(2)
+     , state_name               varchar(50)
+     , formal_name              varchar(100)
+     , admission_to_statehood   datetime
+---->, population               int
+     , capital                  varchar(50)
+     , largest_city             varchar(50)
+     , source_system_code       tinyint not null
+     , create_timestamp         datetime not null
+     , update_timestamp         datetime not null
+
+<Level=1><Error> RES-1: Syntax Error - Line 569, Offset 36 50
+     , state_code               varchar(2)
+     , state_name               varchar(50)
+     , formal_name              varchar(100)
+     , admission_to_statehood   datetime
+     , population               int
+---->, capital                  varchar(50)
+     , largest_city             varchar(50)
+     , source_system_code       tinyint not null
+     , create_timestamp         datetime not null
+     , update_timestamp         datetime not null
+     , constraint pk_state 
+
+<Level=1><Error> RES-1: Syntax Error - Line 570, Offset 36 50
+     , state_name               varchar(50)
+     , formal_name              varchar(100)
+     , admission_to_statehood   datetime
+     , population               int
+     , capital                  varchar(50)
+---->, largest_city             varchar(50)
+     , source_system_code       tinyint not null
+     , create_timestamp         datetime not null
+     , update_timestamp         datetime not null
+     , constraint pk_state 
+       primary key clustered (state_key)
+
+<Level=1><Error> RES-1: Syntax Error - Line 575, Offset 26 state_key
+     , largest_city             varchar(50)
+     , source_system_code       tinyint not null
+     , create_timestamp         datetime not null
+     , update_timestamp         datetime not null
+     , constraint pk_state 
+---->  primary key clustered (state_key)
+       on nds_fg6
+     ) on nds_fg3
+     go
+     
+     if exists
+
+<Level=1><Error> RES-1: Syntax Error - Line 1197, Offset 13 format
+     
+     if exists
+       (select * from sys.foreign_keys
+        where name = 'fk_format_media'
+        and parent_object_id = object_id('format'))
+---->alter table format
+       drop constraint fk_format_media
+     go
+     
+     -- Drop the table:
+     
+
+<Level=1><Error> RES-1: Syntax Error - Line 1198, Offset 8 constraint
+     if exists
+       (select * from sys.foreign_keys
+        where name = 'fk_format_media'
+        and parent_object_id = object_id('format'))
+     alter table format
+---->  drop constraint fk_format_media
+     go
+     
+     -- Drop the table:
+     
+     if exists 
+
+<Level=1><Error> RES-1: Syntax Error - Line 1241, Offset 13 format
+     -- Create FK:
+     
+     if exists
+       (select * from sys.tables
+        where name = 'format')
+---->alter table format
+       add constraint pk_format_media
+       foreign key (media_key)
+       references media(media_key)
+     go
+     
+
+<Level=1><Error> RES-1: Syntax Error - Line 1242, Offset 7 constraint
+     
+     if exists
+       (select * from sys.tables
+        where name = 'format')
+     alter table format
+---->  add constraint pk_format_media
+       foreign key (media_key)
+       references media(media_key)
+     go
+     
+     -- There is no point creating index as this is a tiny table
+
+<Level=1><Error> RES-1: Syntax Error - Line 1243, Offset 16 media_key
+     if exists
+       (select * from sys.tables
+        where name = 'format')
+     alter table format
+       add constraint pk_format_media
+---->  foreign key (media_key)
+       references media(media_key)
+     go
+     
+     -- There is no point creating index as this is a tiny table
+     
+
+<Level=1><Error> RES-1: Syntax Error - Line 1244, Offset 20 media_key
+       (select * from sys.tables
+        where name = 'format')
+     alter table format
+       add constraint pk_format_media
+       foreign key (media_key)
+---->  references media(media_key)
+     go
+     
+     -- There is no point creating index as this is a tiny table
+     
+     -- format
+
+<Level=1><Error> RES-1: Syntax Error - Line 1277, Offset 12 format
+     -- Drop the table:
+     
+     if exists 
+       (select * from sys.tables 
+        where name = 'format')
+---->drop table format
+     go
+     
+     -- Create the table:
+     
+     create table format
+
+<Level=1><Error> RES-1: Syntax Error - Line 1282, Offset 14 format
+     drop table format
+     go
+     
+     -- Create the table:
+     
+---->create table format
+     ( format_key              int not null identity(1,1)
+     , format_name             varchar(30) not null
+     , description             varchar(50)
+     , media_key               int
+     , source_system_code      tinyint not null
+
+<Level=1><Error> RES-1: Syntax Error - Line 1283, Offset 3 format_key
+     go
+     
+     -- Create the table:
+     
+     create table format
+---->( format_key              int not null identity(1,1)
+     , format_name             varchar(30) not null
+     , description             varchar(50)
+     , media_key               int
+     , source_system_code      tinyint not null
+     , create_timestamp        datetime not null
+
+<Level=1><Error> RES-1: Syntax Error - Line 1283, Offset 49 1
+     go
+     
+     -- Create the table:
+     
+     create table format
+---->( format_key              int not null identity(1,1)
+     , format_name             varchar(30) not null
+     , description             varchar(50)
+     , media_key               int
+     , source_system_code      tinyint not null
+     , create_timestamp        datetime not null
+
+<Level=1><Error> RES-1: Syntax Error - Line 1284, Offset 35 30
+     
+     -- Create the table:
+     
+     create table format
+     ( format_key              int not null identity(1,1)
+---->, format_name             varchar(30) not null
+     , description             varchar(50)
+     , media_key               int
+     , source_system_code      tinyint not null
+     , create_timestamp        datetime not null
+     , update_timestamp        datetime not null
+
+<Level=1><Error> RES-1: Syntax Error - Line 1285, Offset 35 50
+     -- Create the table:
+     
+     create table format
+     ( format_key              int not null identity(1,1)
+     , format_name             varchar(30) not null
+---->, description             varchar(50)
+     , media_key               int
+     , source_system_code      tinyint not null
+     , create_timestamp        datetime not null
+     , update_timestamp        datetime not null
+     , constraint pk_format
+
+<Level=1><Error> RES-1: Syntax Error - Line 1291, Offset 26 format_key
+     , media_key               int
+     , source_system_code      tinyint not null
+     , create_timestamp        datetime not null
+     , update_timestamp        datetime not null
+     , constraint pk_format
+---->  primary key clustered (format_key)
+       on nds_fg6
+     , constraint fk_format_media
+       foreign key (media_key)
+       references media(media_key)
+     ) on nds_fg5
+
+<Level=1><Error> RES-1: Syntax Error - Line 1294, Offset 16 media_key
+     , update_timestamp        datetime not null
+     , constraint pk_format
+       primary key clustered (format_key)
+       on nds_fg6
+     , constraint fk_format_media
+---->  foreign key (media_key)
+       references media(media_key)
+     ) on nds_fg5
+     go
+     
+     -- Insert Unknown Record
+
+<Level=1><Error> RES-1: Syntax Error - Line 1295, Offset 20 media_key
+     , constraint pk_format
+       primary key clustered (format_key)
+       on nds_fg6
+     , constraint fk_format_media
+       foreign key (media_key)
+---->  references media(media_key)
+     ) on nds_fg5
+     go
+     
+     -- Insert Unknown Record
+     
+
+<Level=1><Error> RES-1: Syntax Error - Line 1301, Offset 21 format
+     ) on nds_fg5
+     go
+     
+     -- Insert Unknown Record
+     
+---->set identity_insert format on
+     
+     insert into format
+     ( format_key, format_name
+     , description, media_key, source_system_code
+     , create_timestamp, update_timestamp )
+
+<Level=1><Error> RES-1: Syntax Error - Line 1303, Offset 13 format
+     
+     -- Insert Unknown Record
+     
+     set identity_insert format on
+     
+---->insert into format
+     ( format_key, format_name
+     , description, media_key, source_system_code
+     , create_timestamp, update_timestamp )
+     values
+     ( 0, 'Unknown'
+
+<Level=1><Error> RES-1: Syntax Error - Line 1304, Offset 3 format_key
+     -- Insert Unknown Record
+     
+     set identity_insert format on
+     
+     insert into format
+---->( format_key, format_name
+     , description, media_key, source_system_code
+     , create_timestamp, update_timestamp )
+     values
+     ( 0, 'Unknown'
+     , 'Unknown', 0, 0
+
+<Level=1><Error> RES-1: Syntax Error - Line 1308, Offset 3 0
+     insert into format
+     ( format_key, format_name
+     , description, media_key, source_system_code
+     , create_timestamp, update_timestamp )
+     values
+---->( 0, 'Unknown'
+     , 'Unknown', 0, 0
+     , '1900-01-01', '1900-01-01' )
+     
+     set identity_insert format off
+     go
+
+<Level=1><Error> RES-1: Syntax Error - Line 1312, Offset 21 format
+     values
+     ( 0, 'Unknown'
+     , 'Unknown', 0, 0
+     , '1900-01-01', '1900-01-01' )
+     
+---->set identity_insert format off
+     go
+     
+     -- Create FK:
+     
+     if exists
+
+<Level=1><Error> RES-1: Syntax Error - Line 1323, Offset 14 format
+       (select * from sys.tables
+        where name = 'product')
+     alter table product
+       add constraint fk_product_format
+       foreign key (format_key)
+---->  references format(format_key)
+     go
+     
+     if exists
+       (select * from sys.tables
+        where name = 'subscription_sales')
+
+<Level=1><Error> RES-1: Syntax Error - Line 1323, Offset 21 format_key
+       (select * from sys.tables
+        where name = 'product')
+     alter table product
+       add constraint fk_product_format
+       foreign key (format_key)
+---->  references format(format_key)
+     go
+     
+     if exists
+       (select * from sys.tables
+        where name = 'subscription_sales')
+
+<Level=1><Error> RES-1: Syntax Error - Line 1332, Offset 14 format
+       (select * from sys.tables
+        where name = 'subscription_sales')
+     alter table subscription_sales
+       add constraint fk_subscription_sales_format
+       foreign key (format_key)
+---->  references format(format_key)
+     go
+     -- There is no point creating index as this is a tiny table
+     
+     -- package_type
+     
+
+<Level=1><Error> RES-1: Syntax Error - Line 1332, Offset 21 format_key
+       (select * from sys.tables
+        where name = 'subscription_sales')
+     alter table subscription_sales
+       add constraint fk_subscription_sales_format
+       foreign key (format_key)
+---->  references format(format_key)
+     go
+     -- There is no point creating index as this is a tiny table
+     
+     -- package_type
+     
+
+<Level=1><Error> RES-1: Syntax Error - Line 2714, Offset 14 format
+     , constraint fk_product_product_type
+       foreign key (product_type_key)
+       references product_type(product_type_key)
+     , constraint fk_product_format
+       foreign key (format_key)
+---->  references format(format_key)
+     , constraint fk_product_product_status
+       foreign key (product_status_key)
+       references product_status(product_status_key)
+     ) on [primary]
+     go
+
+<Level=1><Error> RES-1: Syntax Error - Line 2714, Offset 21 format_key
+     , constraint fk_product_product_type
+       foreign key (product_type_key)
+       references product_type(product_type_key)
+     , constraint fk_product_format
+       foreign key (format_key)
+---->  references format(format_key)
+     , constraint fk_product_product_status
+       foreign key (product_status_key)
+       references product_status(product_status_key)
+     ) on [primary]
+     go
+
+<Level=1><Error> RES-1: Syntax Error - Line 2716, Offset 16 product_status_key
+       references product_type(product_type_key)
+     , constraint fk_product_format
+       foreign key (format_key)
+       references format(format_key)
+     , constraint fk_product_product_status
+---->  foreign key (product_status_key)
+       references product_status(product_status_key)
+     ) on [primary]
+     go
+     
+     -- Insert Unknown Record:
+
+<Level=1><Error> RES-1: Syntax Error - Line 2717, Offset 29 product_status_key
+     , constraint fk_product_format
+       foreign key (format_key)
+       references format(format_key)
+     , constraint fk_product_product_status
+       foreign key (product_status_key)
+---->  references product_status(product_status_key)
+     ) on [primary]
+     go
+     
+     -- Insert Unknown Record:
+     
+
+<Level=1><Error> RES-1: Syntax Error - Line 2837, Offset 3 start_date
+     
+     create table channel
+     ( channel_key          int not null identity(1,1)
+     , name                 varchar(20) not null
+     , description          varchar(50)
+---->, start_date           datetime
+     , end_date             datetime
+     , status               varchar(10)
+     , source_system_code   tinyint not null
+     , create_timestamp     datetime not null
+     , update_timestamp     datetime not null
+
+<Level=1><Error> RES-1: Syntax Error - Line 2839, Offset 32 10
+     ( channel_key          int not null identity(1,1)
+     , name                 varchar(20) not null
+     , description          varchar(50)
+     , start_date           datetime
+     , end_date             datetime
+---->, status               varchar(10)
+     , source_system_code   tinyint not null
+     , create_timestamp     datetime not null
+     , update_timestamp     datetime not null
+     , constraint pk_channel
+       primary key clustered (channel_key)
+
+<Level=1><Error> RES-1: Syntax Error - Line 2844, Offset 26 channel_key
+     , status               varchar(10)
+     , source_system_code   tinyint not null
+     , create_timestamp     datetime not null
+     , update_timestamp     datetime not null
+     , constraint pk_channel
+---->  primary key clustered (channel_key)
+       on nds_fg6
+     ) on nds_fg4
+     go
+     
+     -- Create FK:
+
+<Level=1><Error> RES-1: Syntax Error - Line 2917, Offset 3 format
+     
+     create table communication
+     ( communication_key    int not null identity(1,1)
+     , title                varchar(50) not null
+     , description          varchar(200)
+---->, format               varchar(20)
+     , language_key         int
+     , category_key         int
+     , issuing_unit_key     int
+     , start_date           datetime
+     , end_date             datetime
+
+<Level=1><Error> RES-1: Syntax Error - Line 2917, Offset 32 20
+     
+     create table communication
+     ( communication_key    int not null identity(1,1)
+     , title                varchar(50) not null
+     , description          varchar(200)
+---->, format               varchar(20)
+     , language_key         int
+     , category_key         int
+     , issuing_unit_key     int
+     , start_date           datetime
+     , end_date             datetime
+
+<Level=1><Error> RES-1: Syntax Error - Line 2923, Offset 32 10
+     , language_key         int
+     , category_key         int
+     , issuing_unit_key     int
+     , start_date           datetime
+     , end_date             datetime
+---->, status               varchar(10)
+     , source_system_code   tinyint not null
+     , create_timestamp     datetime not null
+     , update_timestamp     datetime not null
+     , constraint pk_communication
+       primary key clustered (communication_key)
+
+<Level=1><Error> RES-1: Syntax Error - Line 2928, Offset 26 communication_key
+     , status               varchar(10)
+     , source_system_code   tinyint not null
+     , create_timestamp     datetime not null
+     , update_timestamp     datetime not null
+     , constraint pk_communication
+---->  primary key clustered (communication_key)
+       on nds_fg6
+     , constraint fk_communication_language
+       foreign key (language_key)
+       references language(language_key)
+     , constraint fk_communication_communication_category
+
+<Level=1><Error> RES-1: Syntax Error - Line 2931, Offset 16 language_key
+     , update_timestamp     datetime not null
+     , constraint pk_communication
+       primary key clustered (communication_key)
+       on nds_fg6
+     , constraint fk_communication_language
+---->  foreign key (language_key)
+       references language(language_key)
+     , constraint fk_communication_communication_category
+       foreign key (category_key)
+       references communication_category(communication_category_key)
+     , constraint fk_communication_business_unit
+
+<Level=1><Error> RES-1: Syntax Error - Line 2932, Offset 23 language_key
+     , constraint pk_communication
+       primary key clustered (communication_key)
+       on nds_fg6
+     , constraint fk_communication_language
+       foreign key (language_key)
+---->  references language(language_key)
+     , constraint fk_communication_communication_category
+       foreign key (category_key)
+       references communication_category(communication_category_key)
+     , constraint fk_communication_business_unit
+       foreign key (issuing_unit_key)
+
+<Level=1><Error> RES-1: Syntax Error - Line 2934, Offset 16 category_key
+       on nds_fg6
+     , constraint fk_communication_language
+       foreign key (language_key)
+       references language(language_key)
+     , constraint fk_communication_communication_category
+---->  foreign key (category_key)
+       references communication_category(communication_category_key)
+     , constraint fk_communication_business_unit
+       foreign key (issuing_unit_key)
+       references business_unit(business_unit_key)
+     ) on nds_fg4
+
+<Level=1><Error> RES-1: Syntax Error - Line 2935, Offset 37 communication_category_key
+     , constraint fk_communication_language
+       foreign key (language_key)
+       references language(language_key)
+     , constraint fk_communication_communication_category
+       foreign key (category_key)
+---->  references communication_category(communication_category_key)
+     , constraint fk_communication_business_unit
+       foreign key (issuing_unit_key)
+       references business_unit(business_unit_key)
+     ) on nds_fg4
+     go
+
+<Level=1><Error> RES-1: Syntax Error - Line 2937, Offset 16 issuing_unit_key
+       references language(language_key)
+     , constraint fk_communication_communication_category
+       foreign key (category_key)
+       references communication_category(communication_category_key)
+     , constraint fk_communication_business_unit
+---->  foreign key (issuing_unit_key)
+       references business_unit(business_unit_key)
+     ) on nds_fg4
+     go
+     
+     -- Create FK:
+
+<Level=1><Error> RES-1: Syntax Error - Line 2938, Offset 28 business_unit_key
+     , constraint fk_communication_communication_category
+       foreign key (category_key)
+       references communication_category(communication_category_key)
+     , constraint fk_communication_business_unit
+       foreign key (issuing_unit_key)
+---->  references business_unit(business_unit_key)
+     ) on nds_fg4
+     go
+     
+     -- Create FK:
+     
+
+<Level=1><Error> RES-1: Syntax Error - Line 3268, Offset 3 sent
+     , customer_key            int not null
+     , communication_key       int not null
+     , channel_key             int not null
+     , send_date               datetime
+     , delivery_status_key     int not null
+---->, sent                    tinyint
+     , delivered               tinyint
+     , bounced                 tinyint
+     , opened                  tinyint
+     , clicked_through         tinyint
+     , complaint               tinyint
+
+<Level=1><Error> RES-1: Syntax Error - Line 3280, Offset 26 customer_key
+     , trap_hit                tinyint
+     , source_system_code      tinyint  not null
+     , create_timestamp        datetime not null
+     , update_timestamp        datetime not null
+     , constraint pk_campaign_result
+---->  primary key clustered (customer_key, communication_key, channel_key)
+       on nds_fg6
+     , constraint fk_campaign_result_campaign
+       foreign key (campaign_key)
+       references campaign(campaign_key)
+     , constraint fk_campaign_result_customer
+
+<Level=1><Error> RES-1: Syntax Error - Line 3283, Offset 16 campaign_key
+     , update_timestamp        datetime not null
+     , constraint pk_campaign_result
+       primary key clustered (customer_key, communication_key, channel_key)
+       on nds_fg6
+     , constraint fk_campaign_result_campaign
+---->  foreign key (campaign_key)
+       references campaign(campaign_key)
+     , constraint fk_campaign_result_customer
+       foreign key (customer_key)
+       references customer(customer_key)
+     , constraint fk_campaign_result_communication
+
+<Level=1><Error> RES-1: Syntax Error - Line 3284, Offset 23 campaign_key
+     , constraint pk_campaign_result
+       primary key clustered (customer_key, communication_key, channel_key)
+       on nds_fg6
+     , constraint fk_campaign_result_campaign
+       foreign key (campaign_key)
+---->  references campaign(campaign_key)
+     , constraint fk_campaign_result_customer
+       foreign key (customer_key)
+       references customer(customer_key)
+     , constraint fk_campaign_result_communication
+       foreign key (communication_key)
+
+<Level=1><Error> RES-1: Syntax Error - Line 3286, Offset 16 customer_key
+       on nds_fg6
+     , constraint fk_campaign_result_campaign
+       foreign key (campaign_key)
+       references campaign(campaign_key)
+     , constraint fk_campaign_result_customer
+---->  foreign key (customer_key)
+       references customer(customer_key)
+     , constraint fk_campaign_result_communication
+       foreign key (communication_key)
+       references communication(communication_key)
+     , constraint fk_campaign_result_channel
+
+<Level=1><Error> RES-1: Syntax Error - Line 3287, Offset 23 customer_key
+     , constraint fk_campaign_result_campaign
+       foreign key (campaign_key)
+       references campaign(campaign_key)
+     , constraint fk_campaign_result_customer
+       foreign key (customer_key)
+---->  references customer(customer_key)
+     , constraint fk_campaign_result_communication
+       foreign key (communication_key)
+       references communication(communication_key)
+     , constraint fk_campaign_result_channel
+       foreign key (channel_key)
+
+<Level=1><Error> RES-1: Syntax Error - Line 3289, Offset 16 communication_key
+       references campaign(campaign_key)
+     , constraint fk_campaign_result_customer
+       foreign key (customer_key)
+       references customer(customer_key)
+     , constraint fk_campaign_result_communication
+---->  foreign key (communication_key)
+       references communication(communication_key)
+     , constraint fk_campaign_result_channel
+       foreign key (channel_key)
+       references channel(channel_key)
+     , constraint fk_campaign_result_delivery_status
+
+<Level=1><Error> RES-1: Syntax Error - Line 3290, Offset 28 communication_key
+     , constraint fk_campaign_result_customer
+       foreign key (customer_key)
+       references customer(customer_key)
+     , constraint fk_campaign_result_communication
+       foreign key (communication_key)
+---->  references communication(communication_key)
+     , constraint fk_campaign_result_channel
+       foreign key (channel_key)
+       references channel(channel_key)
+     , constraint fk_campaign_result_delivery_status
+       foreign key (delivery_status_key)
+
+<Level=1><Error> RES-1: Syntax Error - Line 3292, Offset 16 channel_key
+       references customer(customer_key)
+     , constraint fk_campaign_result_communication
+       foreign key (communication_key)
+       references communication(communication_key)
+     , constraint fk_campaign_result_channel
+---->  foreign key (channel_key)
+       references channel(channel_key)
+     , constraint fk_campaign_result_delivery_status
+       foreign key (delivery_status_key)
+       references delivery_status(delivery_status_key)
+     ) on nds_fg4
+
+<Level=1><Error> RES-1: Syntax Error - Line 3293, Offset 22 channel_key
+     , constraint fk_campaign_result_communication
+       foreign key (communication_key)
+       references communication(communication_key)
+     , constraint fk_campaign_result_channel
+       foreign key (channel_key)
+---->  references channel(channel_key)
+     , constraint fk_campaign_result_delivery_status
+       foreign key (delivery_status_key)
+       references delivery_status(delivery_status_key)
+     ) on nds_fg4
+     go
+
+<Level=1><Error> RES-1: Syntax Error - Line 3295, Offset 16 delivery_status_key
+       references communication(communication_key)
+     , constraint fk_campaign_result_channel
+       foreign key (channel_key)
+       references channel(channel_key)
+     , constraint fk_campaign_result_delivery_status
+---->  foreign key (delivery_status_key)
+       references delivery_status(delivery_status_key)
+     ) on nds_fg4
+     go
+     
+     -- supplier_performance
+
+<Level=1><Error> RES-1: Syntax Error - Line 3296, Offset 30 delivery_status_key
+     , constraint fk_campaign_result_channel
+       foreign key (channel_key)
+       references channel(channel_key)
+     , constraint fk_campaign_result_delivery_status
+       foreign key (delivery_status_key)
+---->  references delivery_status(delivery_status_key)
+     ) on nds_fg4
+     go
+     
+     -- supplier_performance
+     
+
+<Level=1><Error> RES-1: Syntax Error - Line 3319, Offset 3 start_date
+     
+     create table supplier_performance
+     ( week_number               int      not null
+     , supplier_key              int      not null
+     , product_key               int      not null
+---->, start_date                datetime 
+     , ordered_quantity          int
+     , unit_cost                 money
+     , ordered_value             money
+     , returns_quantity          int
+     , returns_value             money
+
+<Level=1><Error> RES-1: Syntax Error - Line 3328, Offset 38 9
+     , returns_quantity          int
+     , returns_value             money
+     , rejects_quantity          int
+     , rejects_value             money
+     , total_spend               money
+---->, title_availability        decimal (9,2)
+     , format_availability       decimal (9,2)
+     , stock_outage              decimal (9,2)
+     , average_lead_time         smallint
+     , source_system_code        tinyint not null
+     , create_timestamp          datetime not null
+
+<Level=1><Error> RES-1: Syntax Error - Line 3329, Offset 38 9
+     , returns_value             money
+     , rejects_quantity          int
+     , rejects_value             money
+     , total_spend               money
+     , title_availability        decimal (9,2)
+---->, format_availability       decimal (9,2)
+     , stock_outage              decimal (9,2)
+     , average_lead_time         smallint
+     , source_system_code        tinyint not null
+     , create_timestamp          datetime not null
+     , update_timestamp          datetime not null
+
+<Level=1><Error> RES-1: Syntax Error - Line 3330, Offset 38 9
+     , rejects_quantity          int
+     , rejects_value             money
+     , total_spend               money
+     , title_availability        decimal (9,2)
+     , format_availability       decimal (9,2)
+---->, stock_outage              decimal (9,2)
+     , average_lead_time         smallint
+     , source_system_code        tinyint not null
+     , create_timestamp          datetime not null
+     , update_timestamp          datetime not null
+     , constraint pk_supplier_performance
+
+<Level=1><Error> RES-1: Syntax Error - Line 3336, Offset 26 week_number
+     , average_lead_time         smallint
+     , source_system_code        tinyint not null
+     , create_timestamp          datetime not null
+     , update_timestamp          datetime not null
+     , constraint pk_supplier_performance
+---->  primary key clustered (week_number, supplier_key, product_key)
+       on nds_fg6
+     ) on nds_fg5
+     go
+     
+     -- Build indexes:
+
+<Level=1><Error> RES-1: Syntax Error - Line 3427, Offset 14 format
+     , constraint fk_subscription_sales_package
+       foreign key (package_key)
+       references package(package_key)
+     , constraint fk_subscription_sales_format
+       foreign key (format_key)
+---->  references format(format_key)
+     , constraint fk_subscription_sales_store
+       foreign key (store_key)
+       references store(store_key)
+     , constraint fk_subscription_sales_lead
+       foreign key (lead_key)
+
+<Level=1><Error> RES-1: Syntax Error - Line 3427, Offset 21 format_key
+     , constraint fk_subscription_sales_package
+       foreign key (package_key)
+       references package(package_key)
+     , constraint fk_subscription_sales_format
+       foreign key (format_key)
+---->  references format(format_key)
+     , constraint fk_subscription_sales_store
+       foreign key (store_key)
+       references store(store_key)
+     , constraint fk_subscription_sales_lead
+       foreign key (lead_key)
+
+<Level=1><Error> RES-1: Syntax Error - Line 3429, Offset 16 store_key
+       references package(package_key)
+     , constraint fk_subscription_sales_format
+       foreign key (format_key)
+       references format(format_key)
+     , constraint fk_subscription_sales_store
+---->  foreign key (store_key)
+       references store(store_key)
+     , constraint fk_subscription_sales_lead
+       foreign key (lead_key)
+       references lead(lead_key)
+     ) on [primary]
+
+<Level=1><Error> RES-1: Syntax Error - Line 3430, Offset 20 store_key
+     , constraint fk_subscription_sales_format
+       foreign key (format_key)
+       references format(format_key)
+     , constraint fk_subscription_sales_store
+       foreign key (store_key)
+---->  references store(store_key)
+     , constraint fk_subscription_sales_lead
+       foreign key (lead_key)
+       references lead(lead_key)
+     ) on [primary]
+     go
+
+<Level=1><Error> RES-1: Syntax Error - Line 3432, Offset 16 lead_key
+       references format(format_key)
+     , constraint fk_subscription_sales_store
+       foreign key (store_key)
+       references store(store_key)
+     , constraint fk_subscription_sales_lead
+---->  foreign key (lead_key)
+       references lead(lead_key)
+     ) on [primary]
+     go
+     
+     -- Build indexes
+
+<Level=1><Error> RES-1: Syntax Error - Line 3433, Offset 19 lead_key
+     , constraint fk_subscription_sales_store
+       foreign key (store_key)
+       references store(store_key)
+     , constraint fk_subscription_sales_lead
+       foreign key (lead_key)
+---->  references lead(lead_key)
+     ) on [primary]
+     go
+     
+     -- Build indexes
+     
+
+<Level=1><Warning> REP-10: Alter Table - supplier Failed.  Unable to locate supplier in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE supplier DROP CONSTRAINT fk_supplier_contact .
+<Level=1><Warning> REP-10: Alter Table - supplier Failed.  Unable to locate supplier in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE supplier ADD CONSTRAINT pk_supplier_contact FOREIGN KEY (contact_key) REFERENCES contact (contact_key).
+<Level=1><Warning> REP-10: Alter Table - supplier Failed.  Unable to locate supplier in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE supplier DROP CONSTRAINT fk_supplier_supplier_status .
+<Level=1><Warning> REP-10: Alter Table - supplier Failed.  Unable to locate supplier in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE supplier ADD CONSTRAINT pk_supplier_supplier_status FOREIGN KEY (supplier_status_key) REFERENCES supplier_status (supplier_status_key).
+<Level=1><Warning> REP-10: Alter Table - product Failed.  Unable to locate product in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE product DROP CONSTRAINT fk_product_artist .
+<Level=1><Warning> REP-10: Alter Table - product Failed.  Unable to locate product in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE product ADD CONSTRAINT pk_product_artist FOREIGN KEY (artist_key) REFERENCES artist (artist_key).
+<Level=1><Warning> REP-10: Alter Table - product Failed.  Unable to locate product in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE product DROP CONSTRAINT fk_product_product_status .
+<Level=1><Warning> REP-10: Alter Table - product Failed.  Unable to locate product in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE product ADD CONSTRAINT fk_product_product_status FOREIGN KEY (product_status_key) REFERENCES product_status (product_status_key).
+<Level=1><Warning> REP-10: Alter Table - product_type Failed.  Unable to locate product_type in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE product_type DROP CONSTRAINT fk_product_type_product_category .
+<Level=1><Warning> REP-10: Alter Table - product_type Failed.  Unable to locate product_type in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE product_type ADD CONSTRAINT fk_product_type_product_category FOREIGN KEY (product_category_key) REFERENCES product_category (product_category_key).
+<Level=1><Warning> REP-10: Alter Table - product Failed.  Unable to locate product in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE product DROP CONSTRAINT fk_product_product_type .
+<Level=1><Warning> REP-10: Alter Table - product Failed.  Unable to locate product in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE product ADD CONSTRAINT fk_product_product_type FOREIGN KEY (product_type_key) REFERENCES product_type (product_type_key).
+<Level=1><Warning> REP-10: Alter Table - address Failed.  Unable to locate address in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE address DROP CONSTRAINT fk_address_country .
+<Level=1><Warning> REP-10: Alter Table - address Failed.  Unable to locate address in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE address ADD CONSTRAINT fk_address_country FOREIGN KEY (country_key) REFERENCES country (country_key).
+<Level=1><Warning> REP-10: Alter Table - address Failed.  Unable to locate address in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE address DROP CONSTRAINT fk_address_state .
+<Level=1><Warning> REP-10: Alter Table - address Failed.  Unable to locate address in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE address ADD CONSTRAINT fk_address_state FOREIGN KEY (state_key) REFERENCES state (state_key).
+<Level=1><Warning> REP-39: Create / Alter Index - state_name Failed. Unable to find Table - state.
+<Level=1><Warning> --------->: Error in  CREATE  UNIQUE  INDEX state_name ON state(state_name) ON nds_fg6.
+<Level=1><Warning> REP-10: Alter Table - address Failed.  Unable to locate address in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE address DROP CONSTRAINT fk_address_city .
+<Level=1><Warning> REP-10: Alter Table - address Failed.  Unable to locate address in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE address ADD CONSTRAINT fk_address_city FOREIGN KEY (city_key) REFERENCES city (city_key).
+<Level=1><Warning> REP-10: Alter Table - store Failed.  Unable to locate store in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE store DROP CONSTRAINT fk_store_address .
+<Level=1><Warning> REP-10: Alter Table - address_junction Failed.  Unable to locate address_junction in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE address_junction DROP CONSTRAINT fk_address_junction_address .
+<Level=1><Warning> REP-10: Alter Table - supplier Failed.  Unable to locate supplier in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE supplier DROP CONSTRAINT fk_supplier_address .
+<Level=1><Warning> REP-39: Create / Alter Table - NDS.<DEFAULT>.address Failed. Unable to find Table - state.
+<Level=1><Warning> --------->: Error in CREATE TABLE address   address_key int IDENTITY(1,1) NOT NULL, address1 varchar(50), address2 varchar(50), address3 varchar(50), address4 varchar(50), city_key int, post_code varchar(10), state_key int, country_key int, source_system_code tinyint NOT NULL, create_timestamp datetime NOT NULL, update_timestamp datetime NOT NULL.
+<Level=1><Warning> REP-10: Alter Table - store Failed.  Unable to locate store in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE store ADD CONSTRAINT fk_store_address FOREIGN KEY (address_key) REFERENCES address (address_key).
+<Level=1><Warning> REP-10: Alter Table - address_junction Failed.  Unable to locate address_junction in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE address_junction ADD CONSTRAINT fk_address_junction_address FOREIGN KEY (address_key) REFERENCES address (address_key).
+<Level=1><Warning> REP-10: Alter Table - supplier Failed.  Unable to locate supplier in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE supplier ADD CONSTRAINT fk_supplier_address FOREIGN KEY (address_key) REFERENCES address (address_key).
+<Level=1><Warning> REP-10: Alter Table - address_junction Failed.  Unable to locate address_junction in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE address_junction DROP CONSTRAINT fk_address_junction_address_type .
+<Level=1><Warning> REP-10: Alter Table - address_junction Failed.  Unable to locate address_junction in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE address_junction ADD CONSTRAINT fk_address_junction_address_type FOREIGN KEY (address_type_key) REFERENCES address_type (address_type_key).
+<Level=1><Warning> REP-10: Alter Table - store Failed.  Unable to locate store in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE store DROP CONSTRAINT fk_store_phone_number .
+<Level=1><Warning> REP-10: Alter Table - phone_number_junction Failed.  Unable to locate phone_number_junction in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE phone_number_junction DROP CONSTRAINT fk_phone_number_junction_phone_number .
+<Level=1><Warning> REP-10: Alter Table - supplier Failed.  Unable to locate supplier in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE supplier DROP CONSTRAINT fk_supplier_phone_number .
+<Level=1><Warning> REP-10: Alter Table - store Failed.  Unable to locate store in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE store ADD CONSTRAINT fk_store_phone_number FOREIGN KEY (phone_number_key) REFERENCES phone_number (phone_number_key).
+<Level=1><Warning> REP-10: Alter Table - phone_number_junction Failed.  Unable to locate phone_number_junction in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE phone_number_junction ADD CONSTRAINT fk_phone_number_junction_phone_number FOREIGN KEY (phone_number_key) REFERENCES phone_number (phone_number_key).
+<Level=1><Warning> REP-10: Alter Table - supplier Failed.  Unable to locate supplier in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE supplier ADD CONSTRAINT fk_supplier_phone_number FOREIGN KEY (phone_number_key) REFERENCES phone_number (phone_number_key).
+<Level=1><Warning> REP-10: Alter Table - phone_number_junction Failed.  Unable to locate phone_number_junction in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE phone_number_junction DROP CONSTRAINT fk_phone_number_junction_phone_number_type .
+<Level=1><Warning> REP-10: Alter Table - phone_number_junction Failed.  Unable to locate phone_number_junction in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE phone_number_junction ADD CONSTRAINT fk_phone_number_junction_phone_number_type FOREIGN KEY (phone_number_type_key) REFERENCES phone_number_type (phone_number_type_key).
+<Level=1><Warning> REP-10: Alter Table - email_address_junction Failed.  Unable to locate email_address_junction in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE email_address_junction DROP CONSTRAINT fk_email_address_junction_email_address .
+<Level=1><Warning> REP-10: Alter Table - supplier Failed.  Unable to locate supplier in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE supplier DROP CONSTRAINT fk_supplier_email_address .
+<Level=1><Warning> REP-10: Alter Table - email_address_junction Failed.  Unable to locate email_address_junction in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE email_address_junction ADD CONSTRAINT fk_email_address_junction_email_address FOREIGN KEY (email_address_key) REFERENCES email_address (email_address_key).
+<Level=1><Warning> REP-10: Alter Table - supplier Failed.  Unable to locate supplier in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE supplier ADD CONSTRAINT fk_supplier_email_address FOREIGN KEY (email_address_key) REFERENCES email_address (email_address_key).
+<Level=1><Warning> REP-10: Alter Table - email_address_junction Failed.  Unable to locate email_address_junction in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE email_address_junction DROP CONSTRAINT fk_email_address_junction_email_address_type .
+<Level=1><Warning> REP-10: Alter Table - email_address_junction Failed.  Unable to locate email_address_junction in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE email_address_junction ADD CONSTRAINT fk_email_address_junction_email_address_type FOREIGN KEY (email_address_type_key) REFERENCES email_address_type (email_address_type_key).
+<Level=1><Warning> REP-10: Alter Table - currency_rate Failed.  Unable to locate currency_rate in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE currency_rate DROP CONSTRAINT fk_currency_rate_currency .
+<Level=1><Warning> REP-10: Alter Table - currency_rate Failed.  Unable to locate currency_rate in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE currency_rate ADD CONSTRAINT fk_currency_rate_currency FOREIGN KEY (currency_key) REFERENCES currency (currency_key).
+<Level=1><Warning> REP-10: Alter Table - product Failed.  Unable to locate product in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE product DROP CONSTRAINT fk_product_format .
+<Level=1><Warning> REP-10: Alter Table - subscription_sales Failed.  Unable to locate subscription_sales in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE subscription_sales DROP CONSTRAINT fk_subscription_sales_format .
+<Level=1><Warning> REP-10: Alter Table - package Failed.  Unable to locate package in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE package DROP CONSTRAINT fk_package_package_type .
+<Level=1><Warning> REP-10: Alter Table - package Failed.  Unable to locate package in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE package ADD CONSTRAINT fk_package_package_type FOREIGN KEY (package_type_key) REFERENCES package_type (package_type_key).
+<Level=1><Warning> REP-10: Alter Table - subscription_sales Failed.  Unable to locate subscription_sales in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE subscription_sales DROP CONSTRAINT fk_subscription_sales_package .
+<Level=1><Warning> REP-10: Alter Table - subscription_sales Failed.  Unable to locate subscription_sales in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE subscription_sales ADD CONSTRAINT fk_subscription_sales_package FOREIGN KEY (package_key) REFERENCES package (package_key).
+<Level=1><Warning> REP-10: Alter Table - subscription_sales Failed.  Unable to locate subscription_sales in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE subscription_sales DROP CONSTRAINT fk_subscription_sales_lead .
+<Level=1><Warning> REP-10: Alter Table - subscription_sales Failed.  Unable to locate subscription_sales in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE subscription_sales ADD CONSTRAINT pk_subscription_sales_lead FOREIGN KEY (lead_key) REFERENCES lead (lead_key).
+<Level=1><Warning> REP-10: Alter Table - store Failed.  Unable to locate store in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE store DROP CONSTRAINT fk_store_store_type .
+<Level=1><Warning> REP-10: Alter Table - store Failed.  Unable to locate store in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE store ADD CONSTRAINT fk_store_store_type FOREIGN KEY (store_type_key) REFERENCES store_type (store_type_key).
+<Level=1><Warning> REP-10: Alter Table - region Failed.  Unable to locate region in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE region DROP CONSTRAINT fk_region_division .
+<Level=1><Warning> REP-10: Alter Table - region Failed.  Unable to locate region in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE region ADD CONSTRAINT fk_region_division FOREIGN KEY (division_key) REFERENCES division (division_key).
+<Level=1><Warning> REP-10: Alter Table - store Failed.  Unable to locate store in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE store DROP CONSTRAINT fk_store_region .
+<Level=1><Warning> REP-10: Alter Table - store Failed.  Unable to locate store in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE store ADD CONSTRAINT fk_store_region FOREIGN KEY (region_key) REFERENCES region (region_key).
+<Level=1><Warning> REP-10: Alter Table - customer Failed.  Unable to locate customer in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE customer DROP CONSTRAINT fk_customer_occupation .
+<Level=1><Warning> REP-10: Alter Table - customer Failed.  Unable to locate customer in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE customer ADD CONSTRAINT fk_customer_occupation FOREIGN KEY (occupation_key) REFERENCES occupation (occupation_key).
+<Level=1><Warning> REP-10: Alter Table - customer Failed.  Unable to locate customer in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE customer DROP CONSTRAINT fk_customer_subscriber_band .
+<Level=1><Warning> REP-10: Alter Table - customer Failed.  Unable to locate customer in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE customer ADD CONSTRAINT fk_customer_subscriber_band FOREIGN KEY (subscriber_band_key) REFERENCES subscriber_band (subscriber_band_key).
+<Level=1><Warning> REP-10: Alter Table - customer Failed.  Unable to locate customer in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE customer DROP CONSTRAINT fk_customer_subscriber_class .
+<Level=1><Warning> REP-10: Alter Table - customer Failed.  Unable to locate customer in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE customer ADD CONSTRAINT fk_customer_subscriber_class FOREIGN KEY (subscriber_class_key) REFERENCES subscriber_class (subscriber_class_key).
+<Level=1><Warning> REP-10: Alter Table - customer Failed.  Unable to locate customer in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE customer DROP CONSTRAINT fk_customer_household_income .
+<Level=1><Warning> REP-10: Alter Table - customer Failed.  Unable to locate customer in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE customer ADD CONSTRAINT fk_customer_household_income FOREIGN KEY (household_income_key) REFERENCES household_income (household_income_key).
+<Level=1><Warning> REP-10: Alter Table - interest_junction Failed.  Unable to locate interest_junction in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE interest_junction DROP CONSTRAINT fk_interest_junction_interest .
+<Level=1><Warning> REP-10: Alter Table - interest_junction Failed.  Unable to locate interest_junction in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE interest_junction ADD CONSTRAINT fk_interest_junction_interest FOREIGN KEY (interest_key) REFERENCES interest (interest_key).
+<Level=1><Warning> REP-10: Alter Table - customer Failed.  Unable to locate customer in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE customer DROP CONSTRAINT fk_customer_permission .
+<Level=1><Warning> REP-10: Alter Table - customer Failed.  Unable to locate customer in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE customer ADD CONSTRAINT fk_customer_permission FOREIGN KEY (permission_key) REFERENCES permission (permission_key).
+<Level=1><Warning> REP-10: Alter Table - customer Failed.  Unable to locate customer in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE customer DROP CONSTRAINT fk_customer_customer_status .
+<Level=1><Warning> REP-10: Alter Table - customer Failed.  Unable to locate customer in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE customer ADD CONSTRAINT fk_customer_customer_status FOREIGN KEY (customer_status_key) REFERENCES customer_status (customer_status_key).
+<Level=1><Warning> REP-10: Alter Table - customer Failed.  Unable to locate customer in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE customer DROP CONSTRAINT fk_customer_customer_type .
+<Level=1><Warning> REP-10: Alter Table - customer Failed.  Unable to locate customer in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE customer ADD CONSTRAINT fk_customer_customer_type FOREIGN KEY (customer_type_key) REFERENCES customer_type (customer_type_key).
+<Level=1><Warning> REP-10: Alter Table - communication_subscription Failed.  Unable to locate communication_subscription in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE communication_subscription DROP CONSTRAINT fk_communication_subscription_subscription_status .
+<Level=1><Warning> REP-10: Alter Table - communication_subscription Failed.  Unable to locate communication_subscription in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE communication_subscription ADD CONSTRAINT fk_communication_subscription_subscription_status FOREIGN KEY (subscription_status_key) REFERENCES subscription_status (subscription_status_key).
+<Level=1><Warning> REP-10: Alter Table - communication Failed.  Unable to locate communication in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE communication DROP CONSTRAINT fk_communication_business_unit .
+<Level=1><Warning> REP-10: Alter Table - communication Failed.  Unable to locate communication in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE communication ADD CONSTRAINT fk_communication_business_unit FOREIGN KEY (issuing_unit_key) REFERENCES business_unit (business_unit_key).
+<Level=1><Warning> REP-10: Alter Table - communication Failed.  Unable to locate communication in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE communication DROP CONSTRAINT fk_communication_communication_category .
+<Level=1><Warning> REP-10: Alter Table - communication Failed.  Unable to locate communication in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE communication ADD CONSTRAINT fk_communication_communication_category FOREIGN KEY (category_key) REFERENCES communication_category (communication_category_key).
+<Level=1><Warning> REP-10: Alter Table - communication Failed.  Unable to locate communication in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE communication DROP CONSTRAINT fk_communication_language .
+<Level=1><Warning> REP-10: Alter Table - communication Failed.  Unable to locate communication in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE communication ADD CONSTRAINT fk_communication_language FOREIGN KEY (language_key) REFERENCES language (language_key).
+<Level=1><Warning> REP-10: Alter Table - campaign_result Failed.  Unable to locate campaign_result in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE campaign_result DROP CONSTRAINT fk_campaign_result_campaign .
+<Level=1><Warning> REP-10: Alter Table - campaign_result Failed.  Unable to locate campaign_result in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE campaign_result ADD CONSTRAINT fk_campaign_result_campaign FOREIGN KEY (campaign_key) REFERENCES campaign (campaign_key).
+<Level=1><Warning> REP-10: Alter Table - delivery_status Failed.  Unable to locate delivery_status in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE delivery_status DROP CONSTRAINT fk_delivery_status_delivery_status_category .
+<Level=1><Warning> REP-10: Alter Table - delivery_status Failed.  Unable to locate delivery_status in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE delivery_status ADD CONSTRAINT fk_delivery_status_delivery_status_category FOREIGN KEY (category_key) REFERENCES delivery_status_category (delivery_status_category_key).
+<Level=1><Warning> REP-10: Alter Table - campaign_result Failed.  Unable to locate campaign_result in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE campaign_result DROP CONSTRAINT fk_campaign_result_delivery_status .
+<Level=1><Warning> REP-10: Alter Table - campaign_result Failed.  Unable to locate campaign_result in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE campaign_result ADD CONSTRAINT fk_campaign_result_delivery_status FOREIGN KEY (delivery_status_key) REFERENCES delivery_status (delivery_status_key).
+<Level=1><Warning> REP-10: Alter Table - subscription_sales Failed.  Unable to locate subscription_sales in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE subscription_sales DROP CONSTRAINT fk_subscription_sales_store .
+<Level=1><Warning> REP-10: Alter Table - order_header Failed.  Unable to locate order_header in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE order_header DROP CONSTRAINT fk_order_header_store .
+<Level=1><Warning> REP-10: Alter Table - subscription_sales Failed.  Unable to locate subscription_sales in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE subscription_sales ADD CONSTRAINT fk_subscription_sales_store FOREIGN KEY (store_key) REFERENCES store (store_key).
+<Level=1><Warning> REP-10: Alter Table - order_header Failed.  Unable to locate order_header in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE order_header ADD CONSTRAINT fk_order_header_store FOREIGN KEY (store_key) REFERENCES store (store_key).
+<Level=1><Warning> REP-10: Alter Table - supplier_performance Failed.  Unable to locate supplier_performance in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE supplier_performance DROP CONSTRAINT fk_supplier_performance_supplier .
+<Level=1><Warning> REP-10: Alter Table - supplier_performance Failed.  Unable to locate supplier_performance in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE supplier_performance ADD CONSTRAINT fk_supplier_performance_supplier FOREIGN KEY (supplier_key) REFERENCES supplier (supplier_key).
+<Level=1><Warning> REP-10: Alter Table - order_item Failed.  Unable to locate order_item in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE order_item DROP CONSTRAINT fk_order_item_product .
+<Level=1><Warning> REP-10: Alter Table - order_item Failed.  Unable to locate order_item in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE order_item ADD CONSTRAINT fk_order_item_product FOREIGN KEY (product_key) REFERENCES product (product_key).
+<Level=1><Warning> REP-39: Create / Alter Index - product_code Failed. Unable to find Table - product.
+<Level=1><Warning> --------->: Error in  CREATE  UNIQUE  INDEX product_code ON product(source_system_code, product_code) ON nds_fg6.
+<Level=1><Warning> REP-39: Create / Alter Index - title Failed. Unable to find Table - product.
+<Level=1><Warning> --------->: Error in  CREATE  INDEX title ON product(title) ON nds_fg6.
+<Level=1><Warning> REP-39: Create / Alter Index - artist_key Failed. Unable to find Table - product.
+<Level=1><Warning> --------->: Error in  CREATE  INDEX artist_key ON product(artist_key) ON nds_fg6.
+<Level=1><Warning> REP-10: Alter Table - communication_subscription Failed.  Unable to locate communication_subscription in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE communication_subscription DROP CONSTRAINT fk_communication_subscription_channel .
+<Level=1><Warning> REP-10: Alter Table - campaign_result Failed.  Unable to locate campaign_result in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE campaign_result DROP CONSTRAINT fk_campaign_result_channel .
+<Level=1><Warning> REP-10: Alter Table - channel_junction Failed.  Unable to locate channel_junction in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE channel_junction DROP CONSTRAINT fk_channel_junction_channel .
+<Level=1><Warning> REP-10: Alter Table - communication_subscription Failed.  Unable to locate communication_subscription in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE communication_subscription ADD CONSTRAINT fk_communication_channel FOREIGN KEY (channel_key) REFERENCES channel (channel_key).
+<Level=1><Warning> REP-10: Alter Table - campaign_result Failed.  Unable to locate campaign_result in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE campaign_result ADD CONSTRAINT fk_campaign_result_channel FOREIGN KEY (channel_key) REFERENCES channel (channel_key).
+<Level=1><Warning> REP-10: Alter Table - channel_junction Failed.  Unable to locate channel_junction in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE channel_junction ADD CONSTRAINT fk_channel_junction_channel FOREIGN KEY (channel_key) REFERENCES channel (channel_key).
+<Level=1><Warning> REP-10: Alter Table - communication_subscription Failed.  Unable to locate communication_subscription in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE communication_subscription DROP CONSTRAINT fk_communication_subscription_communication .
+<Level=1><Warning> REP-10: Alter Table - campaign_result Failed.  Unable to locate campaign_result in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE campaign_result DROP CONSTRAINT fk_campaign_result_communication .
+<Level=1><Warning> REP-10: Alter Table - communication_subscription Failed.  Unable to locate communication_subscription in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE communication_subscription ADD CONSTRAINT fk_communication_subscription_communication FOREIGN KEY (communication_key) REFERENCES communication (communication_key).
+<Level=1><Warning> REP-10: Alter Table - campaign_result Failed.  Unable to locate campaign_result in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE campaign_result ADD CONSTRAINT fk_campaign_result_communication FOREIGN KEY (communication_key) REFERENCES communication (communication_key).
+<Level=1><Warning> REP-39: Create / Alter Index - communication_title Failed. Unable to find Table - communication.
+<Level=1><Warning> --------->: Error in  CREATE  UNIQUE  INDEX communication_title ON communication(title) ON nds_fg6.
+<Level=1><Warning> REP-10: Alter Table - address_junction Failed.  Unable to locate address_junction in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE address_junction DROP CONSTRAINT fk_address_junction_customer .
+<Level=1><Warning> REP-10: Alter Table - phone_number_junction Failed.  Unable to locate phone_number_junction in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE phone_number_junction DROP CONSTRAINT fk_phone_number_junction_customer .
+<Level=1><Warning> REP-10: Alter Table - email_address_junction Failed.  Unable to locate email_address_junction in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE email_address_junction DROP CONSTRAINT fk_email_address_junction_customer .
+<Level=1><Warning> REP-10: Alter Table - interest_junction Failed.  Unable to locate interest_junction in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE interest_junction DROP CONSTRAINT fk_interest_junction_customer .
+<Level=1><Warning> REP-10: Alter Table - subscription_sales Failed.  Unable to locate subscription_sales in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE subscription_sales DROP CONSTRAINT fk_subscription_sales_customer .
+<Level=1><Warning> REP-10: Alter Table - communication_subscription Failed.  Unable to locate communication_subscription in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE communication_subscription DROP CONSTRAINT fk_communication_subscription_customer .
+<Level=1><Warning> REP-10: Alter Table - campaign_result Failed.  Unable to locate campaign_result in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE campaign_result DROP CONSTRAINT fk_campaign_result_customer .
+<Level=1><Warning> REP-10: Alter Table - channel_junction Failed.  Unable to locate channel_junction in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE channel_junction DROP CONSTRAINT fk_channel_junction_customer .
+<Level=1><Warning> REP-10: Alter Table - order_header Failed.  Unable to locate order_header in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE order_header DROP CONSTRAINT fk_order_header_customer .
+<Level=1><Warning> REP-10: Alter Table - address_junction Failed.  Unable to locate address_junction in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE address_junction ADD CONSTRAINT fk_address_junction_customer FOREIGN KEY (customer_key) REFERENCES customer (customer_key).
+<Level=1><Warning> REP-10: Alter Table - phone_number_junction Failed.  Unable to locate phone_number_junction in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE phone_number_junction ADD CONSTRAINT fk_phone_number_junction_customer FOREIGN KEY (customer_key) REFERENCES customer (customer_key).
+<Level=1><Warning> REP-10: Alter Table - email_address_junction Failed.  Unable to locate email_address_junction in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE email_address_junction ADD CONSTRAINT fk_email_address_junction_customer FOREIGN KEY (customer_key) REFERENCES customer (customer_key).
+<Level=1><Warning> REP-10: Alter Table - interest_junction Failed.  Unable to locate interest_junction in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE interest_junction ADD CONSTRAINT fk_interest_junction_customer FOREIGN KEY (customer_key) REFERENCES customer (customer_key).
+<Level=1><Warning> REP-10: Alter Table - subscription_sales Failed.  Unable to locate subscription_sales in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE subscription_sales ADD CONSTRAINT fk_subscription_sales_customer FOREIGN KEY (customer_key) REFERENCES customer (customer_key).
+<Level=1><Warning> REP-10: Alter Table - communication_subscription Failed.  Unable to locate communication_subscription in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE communication_subscription ADD CONSTRAINT fk_communication_subscription_customer FOREIGN KEY (customer_key) REFERENCES customer (customer_key).
+<Level=1><Warning> REP-10: Alter Table - campaign_result Failed.  Unable to locate campaign_result in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE campaign_result ADD CONSTRAINT fk_campaign_result_customer FOREIGN KEY (customer_key) REFERENCES customer (customer_key).
+<Level=1><Warning> REP-10: Alter Table - channel_junction Failed.  Unable to locate channel_junction in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE channel_junction ADD CONSTRAINT fk_channel_junction_customer FOREIGN KEY (customer_key) REFERENCES customer (customer_key).
+<Level=1><Warning> REP-10: Alter Table - order_header Failed.  Unable to locate order_header in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE order_header ADD CONSTRAINT fk_order_header_customer FOREIGN KEY (customer_key) REFERENCES customer (customer_key).
+<Level=1><Warning> REP-39: Create / Alter Table - NDS.<DEFAULT>.communication_subscription Failed. Unable to find Table - communication.
+<Level=1><Warning> --------->: Error in CREATE TABLE communication_subscription   customer_key int NOT NULL, communication_key int NOT NULL, channel_key int NOT NULL, subscription_start_date int, subscription_end_date int, subscription_status_key int, source_system_code tinyint NOT NULL, create_timestamp datetime NOT NULL, update_timestamp datetime NOT NULL.
+<Level=1><Warning> REP-39: Create / Alter Index - supplier_key Failed. Unable to find Table - supplier_performance.
+<Level=1><Warning> --------->: Error in  CREATE  UNIQUE  INDEX supplier_key ON supplier_performance(supplier_key) ON nds_fg6.
+<Level=1><Warning> REP-39: Create / Alter Index - product_key Failed. Unable to find Table - supplier_performance.
+<Level=1><Warning> --------->: Error in  CREATE  UNIQUE  INDEX product_key ON supplier_performance(product_key) ON nds_fg6.
+<Level=1><Warning> REP-39: Create / Alter Index - customer_key Failed. Unable to find Table - subscription_sales.
+<Level=1><Warning> --------->: Error in  CREATE  UNIQUE  INDEX customer_key ON subscription_sales(customer_key) ON nds_fg6.
+<Level=1><Warning> REP-39: Create / Alter Index - package_key Failed. Unable to find Table - subscription_sales.
+<Level=1><Warning> --------->: Error in  CREATE  UNIQUE  INDEX package_key ON subscription_sales(package_key) ON nds_fg6.
+<Level=1><Warning> REP-10: Alter Table - order_item Failed.  Unable to locate order_item in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE order_item DROP CONSTRAINT fk_order_item_order_header .
+<Level=1><Warning> REP-10: Alter Table - order_item Failed.  Unable to locate order_item in the model.
+<Level=1><Warning> --------->: Error in ALTER TABLE order_item ADD CONSTRAINT fk_order_item_order_header FOREIGN KEY (order_key) REFERENCES order_header (order_key).
+<Level=1><Warning> REP-39: Create / Alter Table - NDS.<DEFAULT>.order_item Failed. Unable to find Table - product.
+<Level=1><Warning> --------->: Error in CREATE TABLE order_item   order_key int NOT NULL, line_number int NOT NULL, product_key int NOT NULL, quantity decimal(9,2), unit_price smallmoney, unit_cost smallmoney, sales_value money, sales_cost money, margin money, currency_key int, currency_rate smallmoney, unit_price_usd smallmoney, unit_cost_usd smallmoney, sales_value_usd money, sales_cost_usd money, margin_usd money, source_system_code tinyint NOT NULL, create_timestamp datetime NOT NULL, update_timestamp datetime NOT NULL.
+<Level=1><Warning> REP-39: Create / Alter Table - NDS.<DEFAULT>.channel_junction Failed. Unable to find Table - channel.
+<Level=1><Warning> --------->: Error in CREATE TABLE channel_junction   channel_junction_key int IDENTITY(1,1) NOT NULL, customer_key int NOT NULL, channel_key int NOT NULL, channel_type_key int, source_system_code tinyint NOT NULL, create_timestamp datetime NOT NULL, update_timestamp datetime NOT NULL.

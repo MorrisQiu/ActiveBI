@@ -1,0 +1,956 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/27/2023 5:09:36 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="MQLAPTOP"
+  DTS:CreatorName="MQLAPTOP\morri"
+  DTS:DTSID="{842EF9A7-B40D-4845-B2A6-D4C8B5A7F5D1}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.694.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Stage Monthly Incremental"
+  DTS:PackageType="5"
+  DTS:VersionBuild="12"
+  DTS:VersionGUID="{BFC859E7-C7FD-4412-B67E-56689C2E04B5}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MQLAPTOP\SQLEXPRESS.jupiter]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{6415EB92-C97A-4B02-BAAF-05E5AEA07266}"
+      DTS:ObjectName="MQLAPTOP\SQLEXPRESS.jupiter">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=MQLAPTOP\SQLEXPRESS;Initial Catalog=jupiter;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{6415EB92-C97A-4B02-BAAF-05E5AEA07266}MQLAPTOP\SQLEXPRESS.jupiter;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MQLAPTOP\SQLEXPRESS.Stage]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{3B3A8A2C-29B1-4904-AFBB-4760C1F2B3BB}"
+      DTS:ObjectName="MQLAPTOP\SQLEXPRESS.Stage">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=MQLAPTOP\SQLEXPRESS;Initial Catalog=Stage;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{3B3A8A2C-29B1-4904-AFBB-4760C1F2B3BB}MQLAPTOP\SQLEXPRESS.Stage;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9D2D06B0-7F45-4632-9EEE-2ADFBE446B42}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dtCET_CurRate">
+      <DTS:VariableValue
+        DTS:DataType="7">2/27/2023 7:09:38 PM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B148564D-1BFF-48DD-8E6E-144E742061EC}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dtLSET_CurRate">
+      <DTS:VariableValue
+        DTS:DataType="7">2/27/2023 7:10:04 PM</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Extract Currency_rate"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{aaa977ab-a939-4ab5-a735-253644b9f7cf}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Extract Currency_rate"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Extract Currency_rate\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Extract Currency_rate\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Extract Currency_rate\Data Conversion.Inputs[Data Conversion Input].Columns[effective_date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="effective_date"
+                      lineageId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Output].Columns[effective_date]" />
+                    <inputColumn
+                      refId="Package\Extract Currency_rate\Data Conversion.Inputs[Data Conversion Input].Columns[currency_code]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="currency_code"
+                      lineageId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Output].Columns[currency_code]" />
+                    <inputColumn
+                      refId="Package\Extract Currency_rate\Data Conversion.Inputs[Data Conversion Input].Columns[currency_rate]"
+                      cachedDataType="numeric"
+                      cachedName="currency_rate"
+                      cachedPrecision="18"
+                      cachedScale="10"
+                      lineageId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Output].Columns[currency_rate]" />
+                    <inputColumn
+                      refId="Package\Extract Currency_rate\Data Conversion.Inputs[Data Conversion Input].Columns[created]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="created"
+                      lineageId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Output].Columns[created]" />
+                    <inputColumn
+                      refId="Package\Extract Currency_rate\Data Conversion.Inputs[Data Conversion Input].Columns[last_updated]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="last_updated"
+                      lineageId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Output].Columns[last_updated]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Extract Currency_rate\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Extract Currency_rate\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Extract Currency_rate\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of effective_date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Extract Currency_rate\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of effective_date]"
+                      name="Copy of effective_date"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Output].Columns[effective_date]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Extract Currency_rate\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of currency_code]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="3"
+                      lineageId="Package\Extract Currency_rate\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of currency_code]"
+                      name="Copy of currency_code"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Output].Columns[currency_code]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Extract Currency_rate\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of currency_rate]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Extract Currency_rate\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of currency_rate]"
+                      name="Copy of currency_rate"
+                      precision="18"
+                      scale="10"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Output].Columns[currency_rate]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Extract Currency_rate\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of created]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Extract Currency_rate\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of created]"
+                      name="Copy of created"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Output].Columns[created]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Extract Currency_rate\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of last_updated]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Extract Currency_rate\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of last_updated]"
+                      name="Copy of last_updated"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Output].Columns[last_updated]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Extract Currency_rate\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Extract Currency_rate\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Extract Currency_rate\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Extract Currency_rate\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Extract Currency_rate\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Extract Currency_rate\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Extract Currency_rate\Jupiter currency_rate"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Jupiter currency_rate"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[currency_rate]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT effective_date, currency_code, currency_rate, created, last_updated
+FROM    currency_rate
+WHERE (created &gt; ?) AND (created &lt;= ?) OR
+                 (last_updated &gt; ?) AND (last_updated &lt;= ?)
+UNION
+SELECT GETDATE()  AS effective_date, 'USD' AS currency_code, 1.0 AS currency_rate, GETDATE() AS created, GETDATE() AS last_updated</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"Parameter0:Input",{B148564D-1BFF-48DD-8E6E-144E742061EC};"Parameter1:Input",{9D2D06B0-7F45-4632-9EEE-2ADFBE446B42};"Parameter2:Input",{B148564D-1BFF-48DD-8E6E-144E742061EC};"Parameter3:Input",{9D2D06B0-7F45-4632-9EEE-2ADFBE446B42};</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Extract Currency_rate\Jupiter currency_rate.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MQLAPTOP\SQLEXPRESS.jupiter]"
+                  connectionManagerRefId="Package.ConnectionManagers[MQLAPTOP\SQLEXPRESS.jupiter]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Output].Columns[created]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Output].ExternalColumns[created]"
+                      lineageId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Output].Columns[created]"
+                      name="created"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Output].Columns[last_updated]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Output].ExternalColumns[last_updated]"
+                      lineageId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Output].Columns[last_updated]"
+                      name="last_updated"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Output].Columns[effective_date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Output].ExternalColumns[effective_date]"
+                      lineageId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Output].Columns[effective_date]"
+                      name="effective_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Output].Columns[currency_code]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Output].ExternalColumns[currency_code]"
+                      length="3"
+                      lineageId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Output].Columns[currency_code]"
+                      name="currency_code"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Output].Columns[currency_rate]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Output].ExternalColumns[currency_rate]"
+                      lineageId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Output].Columns[currency_rate]"
+                      name="currency_rate"
+                      precision="18"
+                      scale="10"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Output].ExternalColumns[created]"
+                      dataType="dbTimeStamp"
+                      name="created" />
+                    <externalMetadataColumn
+                      refId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Output].ExternalColumns[last_updated]"
+                      dataType="dbTimeStamp"
+                      name="last_updated" />
+                    <externalMetadataColumn
+                      refId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Output].ExternalColumns[effective_date]"
+                      dataType="dbTimeStamp"
+                      name="effective_date" />
+                    <externalMetadataColumn
+                      refId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Output].ExternalColumns[currency_code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="currency_code" />
+                    <externalMetadataColumn
+                      refId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Output].ExternalColumns[currency_rate]"
+                      dataType="numeric"
+                      name="currency_rate"
+                      precision="18"
+                      scale="10" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Error Output].Columns[effective_date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Error Output].Columns[effective_date]"
+                      name="effective_date" />
+                    <outputColumn
+                      refId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Error Output].Columns[currency_code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Error Output].Columns[currency_code]"
+                      name="currency_code" />
+                    <outputColumn
+                      refId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Error Output].Columns[currency_rate]"
+                      dataType="numeric"
+                      lineageId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Error Output].Columns[currency_rate]"
+                      name="currency_rate"
+                      precision="18"
+                      scale="10" />
+                    <outputColumn
+                      refId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Error Output].Columns[created]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Error Output].Columns[created]"
+                      name="created" />
+                    <outputColumn
+                      refId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Error Output].Columns[last_updated]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Error Output].Columns[last_updated]"
+                      name="last_updated" />
+                    <outputColumn
+                      refId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Extract Currency_rate\SQL Server Destination"
+              componentClassID="Microsoft.SQLServerDestination"
+              contactInfo="SQL Server Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;5"
+              description="SQL Server Destination"
+              name="SQL Server Destination"
+              version="5">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.String"
+                  description="The name of the database object to copy data into."
+                  expressionType="Notify"
+                  name="BulkInsertTableName">[dbo].[currency_rate]</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies that any constraints on the destination object are checked during the data copy operation. Corresponds to the bulk insert CHECK_CONSTRAINTS option."
+                  name="BulkInsertCheckConstraints">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of the first row to copy. Corresponds to the bulk insert FIRSTROW option."
+                  expressionType="Notify"
+                  name="BulkInsertFirstRow">-1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies that any insert triggers defined on the destination object will execute during the data copy. Corresponds to the bulk insert FIRE_TRIGGERS option."
+                  name="BulkInsertFireTriggers">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Corresponds to the bulk insert KEEPIDENTITY option."
+                  name="BulkInsertKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null copied to the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="BulkInsertKeepNulls">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of the last row to copy. Corresponds to the bulk insert LASTROW option."
+                  expressionType="Notify"
+                  name="BulkInsertLastRow">-1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of syntax errors and compilation errors that can occur before the data copy operation is canceled. Each row that cannot be copied is ignored and counted as one error. Corresponds to the bulk insert MAXERRORS option."
+                  name="BulkInsertMaxErrors">-1</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies how the data to be copied is sorted. Corresponds to the bulk insert ORDER option."
+                  expressionType="Notify"
+                  name="BulkInsertOrder"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies that a table-level lock is acquired for the duration of the data copy operation. Corresponds to the bulk insert TABLOCK option."
+                  name="BulkInsertTablock">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies in seconds the amount of time the SQL Destination adapter will wait before terminating if there is no data available for insertion.  A timeout value of 0 means the SQL Destination adapter will not time out."
+                  expressionType="Notify"
+                  name="Timeout">30</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion."
+                  name="MaxInsertCommitSize">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Extract Currency_rate\SQL Server Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MQLAPTOP\SQLEXPRESS.Stage]"
+                  connectionManagerRefId="Package.ConnectionManagers[MQLAPTOP\SQLEXPRESS.Stage]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Extract Currency_rate\SQL Server Destination.Inputs[SQL Server Destination Input]"
+                  hasSideEffects="true"
+                  name="SQL Server Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Extract Currency_rate\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Copy of created]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Copy of created"
+                      externalMetadataColumnId="Package\Extract Currency_rate\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[created]"
+                      lineageId="Package\Extract Currency_rate\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of created]" />
+                    <inputColumn
+                      refId="Package\Extract Currency_rate\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Copy of last_updated]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Copy of last_updated"
+                      externalMetadataColumnId="Package\Extract Currency_rate\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[last_updated]"
+                      lineageId="Package\Extract Currency_rate\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of last_updated]" />
+                    <inputColumn
+                      refId="Package\Extract Currency_rate\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Copy of effective_date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Copy of effective_date"
+                      externalMetadataColumnId="Package\Extract Currency_rate\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[effective_date]"
+                      lineageId="Package\Extract Currency_rate\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of effective_date]" />
+                    <inputColumn
+                      refId="Package\Extract Currency_rate\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Copy of currency_code]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="Copy of currency_code"
+                      externalMetadataColumnId="Package\Extract Currency_rate\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[currency_code]"
+                      lineageId="Package\Extract Currency_rate\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of currency_code]" />
+                    <inputColumn
+                      refId="Package\Extract Currency_rate\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Copy of currency_rate]"
+                      cachedDataType="numeric"
+                      cachedName="Copy of currency_rate"
+                      cachedPrecision="18"
+                      cachedScale="10"
+                      externalMetadataColumnId="Package\Extract Currency_rate\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[currency_rate]"
+                      lineageId="Package\Extract Currency_rate\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of currency_rate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Extract Currency_rate\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[created]"
+                      dataType="dbTimeStamp"
+                      name="created" />
+                    <externalMetadataColumn
+                      refId="Package\Extract Currency_rate\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[last_updated]"
+                      dataType="dbTimeStamp"
+                      name="last_updated" />
+                    <externalMetadataColumn
+                      refId="Package\Extract Currency_rate\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[effective_date]"
+                      dataType="dbTimeStamp"
+                      name="effective_date" />
+                    <externalMetadataColumn
+                      refId="Package\Extract Currency_rate\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[currency_code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="currency_code" />
+                    <externalMetadataColumn
+                      refId="Package\Extract Currency_rate\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[currency_rate]"
+                      dataType="numeric"
+                      name="currency_rate"
+                      precision="18"
+                      scale="10" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Extract Currency_rate.Paths[Data Conversion Output]"
+              endId="Package\Extract Currency_rate\SQL Server Destination.Inputs[SQL Server Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Extract Currency_rate\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Extract Currency_rate.Paths[OLE DB Source Output]"
+              endId="Package\Extract Currency_rate\Data Conversion.Inputs[Data Conversion Input]"
+              name="OLE DB Source Output"
+              startId="Package\Extract Currency_rate\Jupiter currency_rate.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get LSET"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{1c6b9cf5-e688-4cfe-99d2-57a1873a6c1c}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get LSET"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{86DDD1E4-EE95-4696-B4E1-806EBE0C5B6B}"
+          SQLTask:SqlStatementSource="select LSET, CET from data_flow &#xA;where name = 'stg_currency_rate'"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="CET"
+            SQLTask:DtsVariableName="User::dtCET_CurRate" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="LSET"
+            SQLTask:DtsVariableName="User::dtLSET_CurRate" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Set CET"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{c86072cf-6f5f-4063-bb85-314a639cd163}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Set CET"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{86DDD1E4-EE95-4696-B4E1-806EBE0C5B6B}"
+          SQLTask:SqlStatementSource="update data_flow&#xA;set CET = getdate()&#xA;where name ='stg_currency_rate' " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate Tables"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{beae9e51-79e8-4f10-a377-bdc0d7560ab3}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate Tables"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{3B3A8A2C-29B1-4904-AFBB-4760C1F2B3BB}"
+          SQLTask:SqlStatementSource="truncate table currency_rate&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update LSET"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{6abe0dc1-929b-4850-b3a2-1ca0cb2200c2}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update LSET"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{86DDD1E4-EE95-4696-B4E1-806EBE0C5B6B}"
+          SQLTask:SqlStatementSource="update data_flow&#xA;set LSET = CET&#xA;, status = 1&#xA;where name = 'stg_currency_rate'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{E0FE5DA3-0237-48A8-9349-0ACA0C4F0AE8}"
+      DTS:From="Package\Truncate Tables"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Set CET" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{4599E041-1A6E-47B6-B6DC-CBB2F71F2A2A}"
+      DTS:From="Package\Set CET"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Get LSET" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{CBC1CC11-D033-4141-A28F-CB0E54AFDCBB}"
+      DTS:From="Package\Get LSET"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Extract Currency_rate" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{F3229308-6FF3-4695-822B-6ACC1385D5FD}"
+      DTS:From="Package\Extract Currency_rate"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Update LSET" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssge="clr-namespace:Microsoft.SqlServer.Graph.Extended;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+        <NodeLayout
+          Size="165.6,41.6"
+          Id="Package\Extract Currency_rate"
+          TopLeft="305.5,407.5" />
+        <NodeLayout
+          Size="127.2,41.6"
+          Id="Package\Get LSET"
+          TopLeft="324.5,305.5" />
+        <NodeLayout
+          Size="147.2,41.6"
+          Id="Package\Set CET"
+          TopLeft="314.5,203.5" />
+        <NodeLayout
+          Size="157.6,41.6"
+          Id="Package\Truncate Tables"
+          TopLeft="309,100.5" />
+        <NodeLayout
+          Size="145.6,41.6"
+          Id="Package\Update LSET"
+          TopLeft="315.5,509.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="388,142.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,61"
+              Start="0,0"
+              End="0,53.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="388,245.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="388,347.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="388,449.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Stage Monthly ETL : Currency Rate"
+          ParentId="Package"
+          Size="349.6,45.6"
+          Id="044bedba-0ef3-4587-b797-f562b44460e3"
+          TopLeft="234.833334001654,19.5999999344176">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="18.156522750854492"
+              Color="#FFFFFFFF"
+              Weight="Bold">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Extract Currency_rate">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="192.834782608696,41.7391304347827"
+          Id="Package\Extract Currency_rate\SQL Server Destination"
+          TopLeft="5.50000000000003,208.978260869566" />
+        <NodeLayout
+          Size="160.278260869566,41.7391304347827"
+          Id="Package\Extract Currency_rate\Data Conversion"
+          TopLeft="22.1956521739131,107.239130434783" />
+        <NodeLayout
+          Size="181.982608695653,41.7391304347827"
+          Id="Package\Extract Currency_rate\Jupiter currency_rate"
+          TopLeft="11.3434782608696,5.50000000000006" />
+        <EdgeLayout
+          Id="Package\Extract Currency_rate.Paths[OLE DB Source Output]"
+          TopLeft="102.334782608696,47.2391304347827">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract Currency_rate.Paths[Data Conversion Output]"
+          TopLeft="102.126086956522,148.978260869565">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Extract Currency_rate\SQL Server Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Extract Currency_rate\Jupiter currency_rate">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

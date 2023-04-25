@@ -1,0 +1,13 @@
+mkdir c:\disk
+mkdir c:\disk\data1
+mkdir c:\disk\data2
+mkdir c:\disk\data3
+mkdir c:\disk\data4
+mkdir c:\disk\data5
+mkdir c:\disk\data6
+mkdir c:\disk\log1
+mkdir c:\disk\log2
+mkdir c:\disk\log3
+mkdir c:\disk\log4
+mkdir c:\disk\log5
+mkdir c:\disk\log6

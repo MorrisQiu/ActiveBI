@@ -1,0 +1,2060 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/24/2023 4:08:47 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="MQLAPTOP"
+  DTS:CreatorName="MQLAPTOP\morri"
+  DTS:DTSID="{8FE7C53D-9B92-4C59-8C4A-6DA360DEA1A0}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.694.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="DDS Fact_Product_Sales"
+  DTS:PackageType="5"
+  DTS:VersionBuild="12"
+  DTS:VersionGUID="{DD1249EA-AFEF-4DEB-A432-A8F480493A12}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A0EE9FC4-9926-4AC3-A5ED-FEE65D2F5FF9}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dtFPS_CET">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/2007</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BFA7F283-A6F3-44DC-A162-F8067585B7D3}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dtFPS_LSET">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/2007</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Get LSET"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{07904065-5473-4646-864d-589a43f641a3}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get LSET"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{86DDD1E4-EE95-4696-B4E1-806EBE0C5B6B}"
+          SQLTask:SqlStatementSource="SELECT LSET, CET&#xA;FROM     data_flow&#xA;WHERE  (name = 'dds_fact_product_sales')"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="CET"
+            SQLTask:DtsVariableName="User::dtFPS_CET" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="LSET"
+            SQLTask:DtsVariableName="User::dtFPS_LSET" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Set CET &amp; Status"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{b971ad68-1555-450f-b3a5-04537bf25594}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Set CET &amp; Status"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{86DDD1E4-EE95-4696-B4E1-806EBE0C5B6B}"
+          SQLTask:SqlStatementSource="UPDATE data_flow&#xA;SET          status = 2, CET = GETDATE()&#xA;WHERE  (name = 'dds_fact_product_sales')" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update LSET &amp; Status"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{e68c7038-aac3-4eb5-ada2-3d33e2ad5531}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update LSET &amp; Status"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{86DDD1E4-EE95-4696-B4E1-806EBE0C5B6B}"
+          SQLTask:SqlStatementSource="UPDATE data_flow&#xA;SET          LSET = CET, status = 1&#xA;WHERE  (name = 'dds_fact_product_sales')" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Upsert fact_product_sales"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{7EAABB3E-8C3B-45C0-9612-D25A9B6E575D}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Upsert fact_product_sales"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Upsert fact_product_sales\Insert Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insert Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[fact_product_sales]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Upsert fact_product_sales\Insert Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{FBF0C644-E13A-478A-8752-FB54F06D542E}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[MQLAPTOP_SQLEXPRESS.DDS]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].Columns[date_key]"
+                      cachedDataType="i4"
+                      cachedName="date_key"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[sales_date_key]"
+                      lineageId="Package\Upsert fact_product_sales\Lookup Sales Date Key.Outputs[Lookup Match Output].Columns[date_key]" />
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].Columns[customer_key]"
+                      cachedDataType="i4"
+                      cachedName="customer_key"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[customer_key]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[customer_key]" />
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].Columns[product_key]"
+                      cachedDataType="i4"
+                      cachedName="product_key"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[product_key]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[product_key]" />
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].Columns[store_key]"
+                      cachedDataType="i4"
+                      cachedName="store_key"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[store_key]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[store_key]" />
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].Columns[order_id]"
+                      cachedDataType="i4"
+                      cachedName="order_id"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[order_id]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[order_id]" />
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].Columns[line_number]"
+                      cachedDataType="i4"
+                      cachedName="line_number"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[line_number]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[line_number]" />
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].Columns[quantity]"
+                      cachedDataType="i4"
+                      cachedName="quantity"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[quantity]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[quantity]" />
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].Columns[unit_price]"
+                      cachedDataType="cy"
+                      cachedName="unit_price"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[unit_price]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[unit_price]" />
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].Columns[unit_cost]"
+                      cachedDataType="cy"
+                      cachedName="unit_cost"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[unit_cost]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[unit_cost]" />
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].Columns[sales_value]"
+                      cachedDataType="cy"
+                      cachedName="sales_value"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[sales_value]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[sales_value]" />
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].Columns[sales_cost]"
+                      cachedDataType="cy"
+                      cachedName="sales_cost"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[sales_cost]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[sales_cost]" />
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].Columns[margin]"
+                      cachedDataType="cy"
+                      cachedName="margin"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[margin]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[margin]" />
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].Columns[sales_date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="sales_date"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[sales_timestamp]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[sales_date]" />
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].Columns[source_system_code]"
+                      cachedDataType="ui1"
+                      cachedName="source_system_code"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[source_system_code]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[source_system_code]" />
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].Columns[create_timestamp]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="create_timestamp"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[create_timestamp]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[create_timestamp]" />
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].Columns[update_timestamp]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="update_timestamp"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[update_timestamp]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[update_timestamp]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[sales_date_key]"
+                      dataType="i4"
+                      name="sales_date_key" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[customer_key]"
+                      dataType="i4"
+                      name="customer_key" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[product_key]"
+                      dataType="i4"
+                      name="product_key" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[store_key]"
+                      dataType="i4"
+                      name="store_key" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[order_id]"
+                      dataType="i4"
+                      name="order_id" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[line_number]"
+                      dataType="i4"
+                      name="line_number" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[quantity]"
+                      dataType="i4"
+                      name="quantity" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[unit_price]"
+                      dataType="cy"
+                      name="unit_price" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[unit_cost]"
+                      dataType="cy"
+                      name="unit_cost" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[sales_value]"
+                      dataType="cy"
+                      name="sales_value" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[sales_cost]"
+                      dataType="cy"
+                      name="sales_cost" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[margin]"
+                      dataType="cy"
+                      name="margin" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[sales_timestamp]"
+                      dataType="dbTimeStamp"
+                      name="sales_timestamp" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[source_system_code]"
+                      dataType="ui1"
+                      name="source_system_code" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[create_timestamp]"
+                      dataType="dbTimeStamp"
+                      name="create_timestamp" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[update_timestamp]"
+                      dataType="dbTimeStamp"
+                      name="update_timestamp" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Upsert fact_product_sales\Insert Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Upsert fact_product_sales\Insert Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\Insert Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Upsert fact_product_sales\Insert Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Upsert fact_product_sales\Lookup Sales Date Key"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup Sales Date Key"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [dbo].[dim_date]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[dim_date]) [refTable]
+where [refTable].[sql_date] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="date_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="date" dataType="DT_STR" length="10" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="system_date" dataType="DT_STR" length="10" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="sql_date" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="julian_date" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="day" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="day_of_the_week" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="day_name" dataType="DT_STR" length="9" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="day_of_the_year" dataType="DT_I2" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="week_number" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="month" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="month_name" dataType="DT_STR" length="9" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="short_month_name" dataType="DT_STR" length="3" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="quarter" dataType="DT_STR" length="2" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="year" dataType="DT_I2" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="fiscal_week" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="fiscal_period" dataType="DT_STR" length="4" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="fiscal_quarter" dataType="DT_STR" length="3" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="fiscal_year" dataType="DT_STR" length="6" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="week_day" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="us_holiday" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="uk_holiday" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="month_end" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="period_end" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="short_day" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="source_system_code" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="create_timestamp" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="update_timestamp" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[sales_date]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Upsert fact_product_sales\Lookup Sales Date Key.Connections[OleDbConnection]"
+                  connectionManagerID="{FBF0C644-E13A-478A-8752-FB54F06D542E}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[MQLAPTOP_SQLEXPRESS.DDS]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Upsert fact_product_sales\Lookup Sales Date Key.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\Lookup Sales Date Key.Inputs[Lookup Input].Columns[sales_date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="sales_date"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[sales_date]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">sql_date</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Upsert fact_product_sales\Lookup Sales Date Key.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Upsert fact_product_sales\Lookup Sales Date Key.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\Lookup Sales Date Key.Outputs[Lookup Match Output].Columns[date_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Upsert fact_product_sales\Lookup Sales Date Key.Outputs[Lookup Match Output].Columns[date_key]"
+                      name="date_key"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">date_key</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Upsert fact_product_sales\Lookup Sales Date Key.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Upsert fact_product_sales\Lookup Sales Date Key.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Upsert fact_product_sales\Lookup Sales Date Key.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Upsert fact_product_sales\Lookup Sales Date Key.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\Lookup Sales Date Key.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Upsert fact_product_sales\Lookup Sales Date Key.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\Lookup Sales Date Key.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Upsert fact_product_sales\Lookup Sales Date Key.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Upsert fact_product_sales\NDS Order Items"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="NDS Order Items"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT order_header.order_id, order_item.line_number, order_item.quantity, order_item.unit_price, order_item.unit_cost, order_item.sales_value, order_item.sales_cost, order_item.margin, order_item.source_system_code, 
+                  order_item.create_timestamp, order_item.update_timestamp, order_header.sales_date, order_header.customer_key, order_header.store_key, order_item.product_key
+FROM     order_item INNER JOIN
+                  order_header ON order_item.order_key = order_header.order_key
+WHERE  (order_header.create_timestamp BETWEEN ? AND ?) OR
+                  (order_header.update_timestamp BETWEEN ? AND ?)</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"Parameter0:Input",{BFA7F283-A6F3-44DC-A162-F8067585B7D3};"Parameter1:Input",{A0EE9FC4-9926-4AC3-A5ED-FEE65D2F5FF9};"Parameter2:Input",{BFA7F283-A6F3-44DC-A162-F8067585B7D3};"Parameter3:Input",{A0EE9FC4-9926-4AC3-A5ED-FEE65D2F5FF9};</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Upsert fact_product_sales\NDS Order Items.Connections[OleDbConnection]"
+                  connectionManagerID="{F327529E-8F10-448B-9A0D-C45BDB48C118}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[MQLAPTOP_SQLEXPRESS.NDS]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[order_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].ExternalColumns[order_id]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[order_id]"
+                      name="order_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[line_number]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].ExternalColumns[line_number]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[line_number]"
+                      name="line_number"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[quantity]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].ExternalColumns[quantity]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[quantity]"
+                      name="quantity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[unit_price]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].ExternalColumns[unit_price]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[unit_price]"
+                      name="unit_price"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[unit_cost]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].ExternalColumns[unit_cost]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[unit_cost]"
+                      name="unit_cost"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[sales_value]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].ExternalColumns[sales_value]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[sales_value]"
+                      name="sales_value"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[sales_cost]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].ExternalColumns[sales_cost]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[sales_cost]"
+                      name="sales_cost"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[margin]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].ExternalColumns[margin]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[margin]"
+                      name="margin"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[source_system_code]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].ExternalColumns[source_system_code]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[source_system_code]"
+                      name="source_system_code"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[create_timestamp]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].ExternalColumns[create_timestamp]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[create_timestamp]"
+                      name="create_timestamp"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[update_timestamp]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].ExternalColumns[update_timestamp]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[update_timestamp]"
+                      name="update_timestamp"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[sales_date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].ExternalColumns[sales_date]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[sales_date]"
+                      name="sales_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[customer_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].ExternalColumns[customer_key]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[customer_key]"
+                      name="customer_key"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[store_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].ExternalColumns[store_key]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[store_key]"
+                      name="store_key"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[product_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].ExternalColumns[product_key]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[product_key]"
+                      name="product_key"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].ExternalColumns[order_id]"
+                      dataType="i4"
+                      name="order_id" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].ExternalColumns[line_number]"
+                      dataType="i4"
+                      name="line_number" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].ExternalColumns[quantity]"
+                      dataType="numeric"
+                      name="quantity"
+                      precision="9"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].ExternalColumns[unit_price]"
+                      dataType="cy"
+                      name="unit_price" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].ExternalColumns[unit_cost]"
+                      dataType="cy"
+                      name="unit_cost" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].ExternalColumns[sales_value]"
+                      dataType="cy"
+                      name="sales_value" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].ExternalColumns[sales_cost]"
+                      dataType="cy"
+                      name="sales_cost" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].ExternalColumns[margin]"
+                      dataType="cy"
+                      name="margin" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].ExternalColumns[source_system_code]"
+                      dataType="ui1"
+                      name="source_system_code" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].ExternalColumns[create_timestamp]"
+                      dataType="dbTimeStamp"
+                      name="create_timestamp" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].ExternalColumns[update_timestamp]"
+                      dataType="dbTimeStamp"
+                      name="update_timestamp" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].ExternalColumns[sales_date]"
+                      dataType="dbTimeStamp"
+                      name="sales_date" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].ExternalColumns[customer_key]"
+                      dataType="i4"
+                      name="customer_key" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].ExternalColumns[store_key]"
+                      dataType="i4"
+                      name="store_key" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].ExternalColumns[product_key]"
+                      dataType="i4"
+                      name="product_key" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[order_id]"
+                      dataType="i4"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[order_id]"
+                      name="order_id" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[line_number]"
+                      dataType="i4"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[line_number]"
+                      name="line_number" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[quantity]"
+                      dataType="numeric"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[quantity]"
+                      name="quantity"
+                      precision="9"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[unit_price]"
+                      dataType="cy"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[unit_price]"
+                      name="unit_price" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[unit_cost]"
+                      dataType="cy"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[unit_cost]"
+                      name="unit_cost" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[sales_value]"
+                      dataType="cy"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[sales_value]"
+                      name="sales_value" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[sales_cost]"
+                      dataType="cy"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[sales_cost]"
+                      name="sales_cost" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[margin]"
+                      dataType="cy"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[margin]"
+                      name="margin" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[source_system_code]"
+                      dataType="ui1"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[source_system_code]"
+                      name="source_system_code" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[create_timestamp]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[create_timestamp]"
+                      name="create_timestamp" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[update_timestamp]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[update_timestamp]"
+                      name="update_timestamp" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[sales_date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[sales_date]"
+                      name="sales_date" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[customer_key]"
+                      dataType="i4"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[customer_key]"
+                      name="customer_key" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[store_key]"
+                      dataType="i4"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[store_key]"
+                      name="store_key" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[product_key]"
+                      dataType="i4"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[product_key]"
+                      name="product_key" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Upsert fact_product_sales\OLE DB Command"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="OLE DB Command"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">UPDATE [dbo].[fact_product_sales] SET [customer_key] = ?,[line_number] = ?,[margin] = ?,[product_key] = ?,[quantity] = ?,[sales_cost] = ?,[sales_date_key] = ?,[sales_timestamp] = ?,[sales_value] = ?,[source_system_code] = ?,[store_key] = ?,[unit_cost] = ?,[unit_price] = ?,[update_timestamp] = ? WHERE [order_id] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Upsert fact_product_sales\OLE DB Command.Connections[OleDbConnection]"
+                  connectionManagerID="{FBF0C644-E13A-478A-8752-FB54F06D542E}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[MQLAPTOP_SQLEXPRESS.DDS]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].Columns[customer_key]"
+                      cachedDataType="i4"
+                      cachedName="customer_key"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[customer_key]" />
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].Columns[line_number]"
+                      cachedDataType="i4"
+                      cachedName="line_number"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[line_number]" />
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].Columns[margin]"
+                      cachedDataType="cy"
+                      cachedName="margin"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[margin]" />
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].Columns[order_id]"
+                      cachedDataType="i4"
+                      cachedName="order_id"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_14]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[order_id]" />
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].Columns[product_key]"
+                      cachedDataType="i4"
+                      cachedName="product_key"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[product_key]" />
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].Columns[quantity]"
+                      cachedDataType="i4"
+                      cachedName="quantity"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[quantity]" />
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].Columns[sales_cost]"
+                      cachedDataType="cy"
+                      cachedName="sales_cost"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_5]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[sales_cost]" />
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].Columns[date_key]"
+                      cachedDataType="i4"
+                      cachedName="date_key"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_6]"
+                      lineageId="Package\Upsert fact_product_sales\Lookup Sales Date Key.Outputs[Lookup Match Output].Columns[date_key]" />
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].Columns[sales_date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="sales_date"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_7]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[sales_date]" />
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].Columns[sales_value]"
+                      cachedDataType="cy"
+                      cachedName="sales_value"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_8]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[sales_value]" />
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].Columns[source_system_code]"
+                      cachedDataType="ui1"
+                      cachedName="source_system_code"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_9]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[source_system_code]" />
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].Columns[store_key]"
+                      cachedDataType="i4"
+                      cachedName="store_key"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_10]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[store_key]" />
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].Columns[unit_cost]"
+                      cachedDataType="cy"
+                      cachedName="unit_cost"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_11]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[unit_cost]" />
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].Columns[unit_price]"
+                      cachedDataType="cy"
+                      cachedName="unit_price"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_12]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[unit_price]" />
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].Columns[update_timestamp]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="update_timestamp"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_13]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[update_timestamp]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="i4"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      dataType="i4"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      dataType="cy"
+                      name="Param_2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      dataType="i4"
+                      name="Param_3">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      dataType="i4"
+                      name="Param_4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_5]"
+                      dataType="cy"
+                      name="Param_5">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_6]"
+                      dataType="i4"
+                      name="Param_6">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_7]"
+                      dataType="dbTimeStamp"
+                      name="Param_7">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_8]"
+                      dataType="cy"
+                      name="Param_8">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_9]"
+                      dataType="ui1"
+                      name="Param_9">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_10]"
+                      dataType="i4"
+                      name="Param_10">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_11]"
+                      dataType="cy"
+                      name="Param_11">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_12]"
+                      dataType="cy"
+                      name="Param_12">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_13]"
+                      dataType="dbTimeStamp"
+                      name="Param_13">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_14]"
+                      dataType="i4"
+                      name="Param_14">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Upsert fact_product_sales\OLE DB Command.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Upsert fact_product_sales\OLE DB Command.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Upsert fact_product_sales\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Upsert fact_product_sales\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Upsert fact_product_sales\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Upsert fact_product_sales\Slowly Changing Dimension"
+              componentClassID="Microsoft.SCD"
+              contactInfo="Slowly Changing Dimension;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;3"
+              description="Updates a SQL Server Analysis Services data warehouse dimension. Update dimension records that are already present and  insert dimension records that aren't. For example, update the DimProduct table of the AdventureWorksDW OLAP database with data from the Products table in the AdventureWorks OLTP database."
+              name="Slowly Changing Dimension"
+              version="3">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SELECT statement used to create a schema rowset."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT [customer_key], [line_number], [margin], [order_id], [product_key], [quantity], [sales_cost], [sales_date_key], [sales_timestamp], [sales_value], [source_system_code], [store_key], [unit_cost], [unit_price], [update_timestamp] FROM [dbo].[fact_product_sales]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the WHERE clause in the SELECT statement that selects the current row among rows with identical business keys."
+                  name="CurrentRowWhere"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether historical attribute updates are directed to the transformation output for changing attribute updates."
+                  name="UpdateChangingAttributeHistory">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the transformation fails when columns with fixed attributes contain changes."
+                  name="FailOnFixedAttributeChange">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the column name for the inferred member."
+                  name="InferredMemberIndicator"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether inferred member updates are detected."
+                  name="EnableInferredMember">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the transformation fails when a lookup of an existing record fails."
+                  name="FailOnLookupFailure">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies that all rows in the input are new or the transformation detects the change type."
+                  name="IncomingRowChangeType"
+                  typeConverter="IncomingRowChangeType">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Connections[LookupConnection]"
+                  connectionManagerID="{FBF0C644-E13A-478A-8752-FB54F06D542E}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[MQLAPTOP_SQLEXPRESS.DDS]"
+                  description="Defines the connection to use for lookups in the dimension table"
+                  name="LookupConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]"
+                  name="Slowly Changing Dimension Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[customer_key]"
+                      cachedDataType="i4"
+                      cachedName="customer_key"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[customer_key]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[customer_key]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[line_number]"
+                      cachedDataType="i4"
+                      cachedName="line_number"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[line_number]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[line_number]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[margin]"
+                      cachedDataType="cy"
+                      cachedName="margin"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[margin]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[margin]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[order_id]"
+                      cachedDataType="i4"
+                      cachedName="order_id"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[order_id]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[order_id]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[product_key]"
+                      cachedDataType="i4"
+                      cachedName="product_key"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[product_key]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[product_key]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[quantity]"
+                      cachedDataType="i4"
+                      cachedName="quantity"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[quantity]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[quantity]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[sales_cost]"
+                      cachedDataType="cy"
+                      cachedName="sales_cost"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[sales_cost]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[sales_cost]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[date_key]"
+                      cachedDataType="i4"
+                      cachedName="date_key"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[sales_date_key]"
+                      lineageId="Package\Upsert fact_product_sales\Lookup Sales Date Key.Outputs[Lookup Match Output].Columns[date_key]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[sales_date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="sales_date"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[sales_timestamp]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[sales_date]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[sales_value]"
+                      cachedDataType="cy"
+                      cachedName="sales_value"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[sales_value]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[sales_value]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[source_system_code]"
+                      cachedDataType="ui1"
+                      cachedName="source_system_code"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[source_system_code]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[source_system_code]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[store_key]"
+                      cachedDataType="i4"
+                      cachedName="store_key"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[store_key]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[store_key]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[unit_cost]"
+                      cachedDataType="cy"
+                      cachedName="unit_cost"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[unit_cost]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[unit_cost]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[unit_price]"
+                      cachedDataType="cy"
+                      cachedName="unit_price"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[unit_price]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[unit_price]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[update_timestamp]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="update_timestamp"
+                      externalMetadataColumnId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[update_timestamp]"
+                      lineageId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output].Columns[update_timestamp]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[customer_key]"
+                      dataType="i4"
+                      name="customer_key" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[line_number]"
+                      dataType="i4"
+                      name="line_number" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[margin]"
+                      dataType="cy"
+                      name="margin" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[order_id]"
+                      dataType="i4"
+                      name="order_id" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[product_key]"
+                      dataType="i4"
+                      name="product_key" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[quantity]"
+                      dataType="i4"
+                      name="quantity" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[sales_cost]"
+                      dataType="cy"
+                      name="sales_cost" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[sales_date_key]"
+                      dataType="i4"
+                      name="sales_date_key" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[sales_timestamp]"
+                      dataType="dbTimeStamp"
+                      name="sales_timestamp" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[sales_value]"
+                      dataType="cy"
+                      name="sales_value" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[source_system_code]"
+                      dataType="ui1"
+                      name="source_system_code" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[store_key]"
+                      dataType="i4"
+                      name="store_key" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[unit_cost]"
+                      dataType="cy"
+                      name="unit_cost" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[unit_price]"
+                      dataType="cy"
+                      name="unit_price" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[update_timestamp]"
+                      dataType="dbTimeStamp"
+                      name="update_timestamp" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Outputs[Unchanged Output]"
+                  description="Unchanged rows"
+                  exclusionGroup="1"
+                  name="Unchanged Output"
+                  synchronousInputId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Outputs[New Output]"
+                  description="New rows"
+                  exclusionGroup="1"
+                  name="New Output"
+                  synchronousInputId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Outputs[Fixed Attribute Output]"
+                  description="Rows with changes in columns tagged FixedAttribute"
+                  exclusionGroup="1"
+                  name="Fixed Attribute Output"
+                  synchronousInputId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Outputs[Changing Attribute Updates Output]"
+                  description="These rows contain new information for ChangingAttribute (Type 1) column changes"
+                  exclusionGroup="1"
+                  name="Changing Attribute Updates Output"
+                  synchronousInputId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Outputs[Historical Attribute Inserts Output]"
+                  description="HistoricalAttribute (Type 2) changes result in these new rows"
+                  exclusionGroup="2"
+                  name="Historical Attribute Inserts Output"
+                  synchronousInputId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Outputs[Inferred Member Updates Output]"
+                  description="Information to update unpopulated initial dimension row"
+                  exclusionGroup="1"
+                  name="Inferred Member Updates Output"
+                  synchronousInputId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Upsert fact_product_sales.Paths[Changing Attribute Updates Output]"
+              endId="Package\Upsert fact_product_sales\OLE DB Command.Inputs[OLE DB Command Input]"
+              name="Changing Attribute Updates Output"
+              startId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Outputs[Changing Attribute Updates Output]" />
+            <path
+              refId="Package\Upsert fact_product_sales.Paths[Lookup Match Output]"
+              endId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]"
+              name="Lookup Match Output"
+              startId="Package\Upsert fact_product_sales\Lookup Sales Date Key.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Upsert fact_product_sales.Paths[New Output]"
+              endId="Package\Upsert fact_product_sales\Insert Destination.Inputs[OLE DB Destination Input]"
+              name="New Output"
+              startId="Package\Upsert fact_product_sales\Slowly Changing Dimension.Outputs[New Output]" />
+            <path
+              refId="Package\Upsert fact_product_sales.Paths[OLE DB Source Output]"
+              endId="Package\Upsert fact_product_sales\Lookup Sales Date Key.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\Upsert fact_product_sales\NDS Order Items.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{1819DB23-8A92-4E3D-AB64-AEEA8FFC06CD}"
+      DTS:From="Package\Set CET &amp; Status"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Get LSET" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{8C1C326C-8482-4196-9432-09E1DF781840}"
+      DTS:From="Package\Get LSET"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Upsert fact_product_sales" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{3A9C8C7C-7544-427D-B9EE-5070B3364F90}"
+      DTS:From="Package\Upsert fact_product_sales"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Update LSET &amp; Status" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="124,41.6"
+          Id="Package\Get LSET"
+          TopLeft="527.285693551813,112.795238140499" />
+        <NodeLayout
+          Size="199.2,41.6"
+          Id="Package\Set CET &amp; Status"
+          TopLeft="487.999980827173,12.4333333884345" />
+        <NodeLayout
+          Size="199.2,41.6"
+          Id="Package\Update LSET &amp; Status"
+          TopLeft="487.999980827173,317.233333388434" />
+        <NodeLayout
+          Size="199.2,41.6"
+          Id="Package\Upsert fact_product_sales"
+          TopLeft="487.999980827173,215.633333388434" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="588.442837189493,54.0333333884345">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,58.7619047520648"
+              Start="0,0"
+              End="0,51.2619047520648">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51.2619047520648" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="588.442837189493,154.395238140499">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,61.2380952479347"
+              Start="0,0"
+              End="0,53.7380952479347">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53.7380952479347" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="587.599980827173,257.233333388434">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Upsert fact_product_sales">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="167.2,41.6"
+          Id="Package\Upsert fact_product_sales\OLE DB Command"
+          TopLeft="260.115383239893,308.299999984105" />
+        <NodeLayout
+          Size="157.6,41.6"
+          Id="Package\Upsert fact_product_sales\NDS Order Items"
+          TopLeft="230.3,5.49999999999995" />
+        <NodeLayout
+          Size="208,41.6"
+          Id="Package\Upsert fact_product_sales\Slowly Changing Dimension"
+          TopLeft="205.1,208.7" />
+        <NodeLayout
+          Size="159.2,41.6"
+          Id="Package\Upsert fact_product_sales\Insert Destination"
+          TopLeft="5.50000000000009,310.3" />
+        <NodeLayout
+          Size="186.4,41.6"
+          Id="Package\Upsert fact_product_sales\Lookup Sales Date Key"
+          TopLeft="215.9,107.1" />
+        <EdgeLayout
+          Id="Package\Upsert fact_product_sales.Paths[OLE DB Source Output]"
+          TopLeft="309.1,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,18.25,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Upsert fact_product_sales.Paths[New Output]"
+          TopLeft="275.766666666667,250.3">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-190.666666666667,60"
+              Start="0,0"
+              End="-190.666666666667,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.2748091603054" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.2748091603054"
+                    Point2="0,24.2748091603054"
+                    Point3="-4,24.2748091603054" />
+                  <mssgle:LineSegment
+                    End="-186.666666666667,24.2748091603054" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-186.666666666667,24.2748091603054"
+                    Point2="-190.666666666667,24.2748091603054"
+                    Point3="-190.666666666667,28.2748091603054" />
+                  <mssgle:LineSegment
+                    End="-190.666666666667,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-131.293372395834,29.2748091603054,71.920078125,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Upsert fact_product_sales.Paths[Lookup Match Output]"
+          TopLeft="309.1,148.7">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-57.0600390625,18.25,114.120078125,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Upsert fact_product_sales.Paths[Changing Attribute Updates Output]"
+          TopLeft="343.074358286613,250.3">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,57.9999999841054"
+              Start="0,0"
+              End="0,50.4999999841054">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.4999999841054" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-87.1950390625,17.2499999920527,174.390078125,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Upsert fact_product_sales\NDS Order Items">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Upsert fact_product_sales\Slowly Changing Dimension">
+    <Properties>
+      <Property>
+        <Name>SCDMetadata</Name>
+        <Value
+          type="q2:string">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SCDWizardMetadata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionID&gt;{FBF0C644-E13A-478A-8752-FB54F06D542E}&lt;/ConnectionID&gt;
+  &lt;TableName&gt;[dbo].[fact_product_sales]&lt;/TableName&gt;
+  &lt;InputToColumnsCollection&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;NDS Order Items.Outputs[OLE DB Source Output].Columns[create_timestamp]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;create_timestamp&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;None&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;NDS Order Items.Outputs[OLE DB Source Output].Columns[customer_key]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;customer_key&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;NDS Order Items.Outputs[OLE DB Source Output].Columns[line_number]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;line_number&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;NDS Order Items.Outputs[OLE DB Source Output].Columns[margin]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;margin&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;NDS Order Items.Outputs[OLE DB Source Output].Columns[order_id]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;order_id&lt;/ColumnName&gt;
+      &lt;KeyType&gt;BusinessKey&lt;/KeyType&gt;
+      &lt;ChangeType&gt;None&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;NDS Order Items.Outputs[OLE DB Source Output].Columns[product_key]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;product_key&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;NDS Order Items.Outputs[OLE DB Source Output].Columns[quantity]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;quantity&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;NDS Order Items.Outputs[OLE DB Source Output].Columns[sales_cost]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;sales_cost&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Lookup Sales Date Key.Outputs[Lookup Match Output].Columns[date_key]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;sales_date_key&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;NDS Order Items.Outputs[OLE DB Source Output].Columns[sales_date]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;sales_timestamp&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;NDS Order Items.Outputs[OLE DB Source Output].Columns[sales_value]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;sales_value&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;NDS Order Items.Outputs[OLE DB Source Output].Columns[source_system_code]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;source_system_code&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;NDS Order Items.Outputs[OLE DB Source Output].Columns[store_key]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;store_key&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;NDS Order Items.Outputs[OLE DB Source Output].Columns[unit_cost]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;unit_cost&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;NDS Order Items.Outputs[OLE DB Source Output].Columns[unit_price]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;unit_price&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;NDS Order Items.Outputs[OLE DB Source Output].Columns[update_timestamp]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;update_timestamp&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+  &lt;/InputToColumnsCollection&gt;
+  &lt;GeneratedComponentsIdentificationStrings&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Insert Destination&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;OLE DB Command&lt;/anyType&gt;
+  &lt;/GeneratedComponentsIdentificationStrings&gt;
+  &lt;FailFixedAttribute&gt;false&lt;/FailFixedAttribute&gt;
+  &lt;FailChangeAttribute&gt;false&lt;/FailChangeAttribute&gt;
+  &lt;UseStartEndDate&gt;false&lt;/UseStartEndDate&gt;
+  &lt;CurrentIndicatorColumn /&gt;
+  &lt;InferredIndicatorColumn /&gt;
+  &lt;ValueCurrent /&gt;
+  &lt;ValueExpired /&gt;
+  &lt;StartDateColumn /&gt;
+  &lt;EndDateColumn /&gt;
+  &lt;DateVariable /&gt;
+  &lt;EnableInferredSupport&gt;false&lt;/EnableInferredSupport&gt;
+&lt;/SCDWizardMetadata&gt;</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Upsert fact_product_sales\Lookup Sales Date Key">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[dim_date]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Upsert fact_product_sales\Insert Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

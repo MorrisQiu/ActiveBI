@@ -1,0 +1,41 @@
+update nds.dbo.store 
+set store_name = s.store_name
+, store_type_key = st.store_type_key
+, address_key = a.address_key
+, phone_number_key = pn.phone_number_key
+, region_key = r.region_key
+, web_site = s.web_site
+, update_timestamp = getdate()
+from stage.dbo.store s
+inner join nds.dbo.store n
+  on s.store_number = n.store_number
+inner join nds.dbo.store_type st
+  on n.store_type_key = st.store_type_key
+inner join nds.dbo.address a
+  on n.address_key = a.address_key
+inner join nds.dbo.phone_number pn
+  on n.phone_number_key = pn.phone_number_key
+inner join nds.dbo.region r
+  on n.region_key = r.region_key
+inner join nds.dbo.division d
+  on r.division_key = d.division_key
+inner join nds.dbo.city c
+  on a.city_key = c.city_key
+inner join nds.dbo.state sta
+  on a.state_key = sta.state_key
+inner join nds.dbo.country co
+  on a.country_key = co.country_key
+where coalesce(s.store_name,'') <> coalesce(n.store_name,'')
+or coalesce(s.store_type,'') <> coalesce(st.store_type,'')
+or coalesce(s.address1,'') <> coalesce(a.address1,'')
+or coalesce(s.address2,'') <> coalesce(a.address2,'')
+or coalesce(s.address3,'') <> coalesce(a.address3,'')
+or coalesce(s.address4,'') <> coalesce(a.address4,'')
+or coalesce(s.city,'') <> coalesce(c.city_name,'')
+or coalesce(s.zipcode,'') <> coalesce(a.post_code,'')
+or coalesce(s.state,'') <> coalesce(sta.state_name,'')
+or coalesce(s.country,'') <> COALESCE(co.country_code,'') 
+or coalesce(s.phone_number,'') <> coalesce(pn.phone_number,'')
+or coalesce(s.web_site,'') <> coalesce(n.web_site,'')
+or coalesce(s.region,'') <> coalesce(r.region_name,'')
+or coalesce(s.division,'') <> coalesce(d.division_name,'');

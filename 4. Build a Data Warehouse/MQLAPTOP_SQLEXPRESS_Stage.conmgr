@@ -1,0 +1,12 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="MQLAPTOP_SQLEXPRESS"
+  DTS:DTSID="{517B6713-C080-450B-A749-FF5ECDD1E6A9}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=MQLAPTOP\SQLEXPRESS;Initial Catalog=Stage;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-ActiveBI2023-{517B6713-C080-450B-A749-FF5ECDD1E6A9}MQLAPTOP\SQLEXPRESS;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

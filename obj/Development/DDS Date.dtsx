@@ -1,0 +1,1646 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/24/2023 2:41:41 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="MQLAPTOP"
+  DTS:CreatorName="MQLAPTOP\morri"
+  DTS:DTSID="{C53FF35A-3517-4F7F-A37F-B85995988061}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.694.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="DDS Date"
+  DTS:PackageType="5"
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{20C6C903-8152-4568-8B67-B53B2C873F67}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager 1]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{B06838C6-B004-45A8-8B17-DD59D2C7AB2B}"
+      DTS:ObjectName="Excel Connection Manager 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Courses\DWCareer\Data\External\DimDate.xls;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager 2]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{0B1D2C54-9B09-4B11-92B1-AA86A091C002}"
+      DTS:ObjectName="Excel Connection Manager 2">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Courses\DWCareer\Data\External\DimDate-MQ.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager 3]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{E725651D-1373-44D1-A482-E312056E27F6}"
+      DTS:ObjectName="Excel Connection Manager 3">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Courses\DWCareer\Data\External\DimDate-MQ.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager 4]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{14BE9D8E-4B10-40EB-933D-75418B799766}"
+      DTS:ObjectName="Excel Connection Manager 4">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Courses\DWCareer\Data\External\DimDate-MQ.xls;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MQLAPTOP\SQLEXPRESS.DDS]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{B706ECCE-068C-4D08-BB40-599D05DE8302}"
+      DTS:ObjectName="MQLAPTOP\SQLEXPRESS.DDS">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=MQLAPTOP\SQLEXPRESS;Initial Catalog=DDS;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-DDS Date-{B706ECCE-068C-4D08-BB40-599D05DE8302}MQLAPTOP\SQLEXPRESS.DDS;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Dim Date Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{702813DF-D1D0-441B-9D60-3E2FF9B7D95C}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Dim Date Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Dim Date Data Flow Task\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Dim Date Data Flow Task\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[FullDate]"
+                      cachedDataType="date"
+                      cachedName="FullDate"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[FullDate]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[asi_date]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="asi_date"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[asi_date]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[DayNameOfWeek]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="DayNameOfWeek"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[DayNameOfWeek]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[MonthName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="MonthName"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[MonthName]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[short_month_name]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="short_month_name"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[short_month_name]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[fiscal_period]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="fiscal_period"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[fiscal_period]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[fiscal_quarter]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="fiscal_quarter"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[fiscal_quarter]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[fiscal_year]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="fiscal_year"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[fiscal_year]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[CalendarQuarter]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CalendarQuarter"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[CalendarQuarter]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Dim Date Data Flow Task\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of FullDate]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="10"
+                      lineageId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of FullDate]"
+                      name="Copy of FullDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[FullDate]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of asi_date]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="10"
+                      lineageId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of asi_date]"
+                      name="Copy of asi_date"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[asi_date]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DayNameOfWeek]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="9"
+                      lineageId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DayNameOfWeek]"
+                      name="Copy of DayNameOfWeek"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[DayNameOfWeek]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of MonthName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="9"
+                      lineageId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of MonthName]"
+                      name="Copy of MonthName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[MonthName]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of short_month_name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="3"
+                      lineageId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of short_month_name]"
+                      name="Copy of short_month_name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[short_month_name]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of fiscal_period]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="4"
+                      lineageId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of fiscal_period]"
+                      name="Copy of fiscal_period"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[fiscal_period]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of fiscal_quarter]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="3"
+                      lineageId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of fiscal_quarter]"
+                      name="Copy of fiscal_quarter"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[fiscal_quarter]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of fiscal_year]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="6"
+                      lineageId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of fiscal_year]"
+                      name="Copy of fiscal_year"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[fiscal_year]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CalendarQuarter]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="2"
+                      lineageId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CalendarQuarter]"
+                      name="Copy of CalendarQuarter"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[CalendarQuarter]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Dim Date Data Flow Task\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Dim Date Data Flow Task\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Dim Date Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Dim Date Data Flow Task\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Dim Date Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[source_system_code]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Dim Date Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[source_system_code]"
+                      name="source_system_code"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">4</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">4</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[create_timestamp]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Dim Date Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[create_timestamp]"
+                      name="create_timestamp"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[update_timestamp]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Dim Date Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[update_timestamp]"
+                      name="update_timestamp"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Dim Date Data Flow Task\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Dim Date Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Dim Date Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Dim Date Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Dim Date Data Flow Task\Excel Source"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="Excel Source"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">'Calendar TextOnly$'</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Dim Date Data Flow Task\Excel Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager 4]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager 4]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[DateKey]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[DateKey]"
+                      length="255"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[DateKey]"
+                      name="DateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[FullDate]"
+                      dataType="date"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[FullDate]"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[FullDate]"
+                      name="FullDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[DayOfWeek]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[DayOfWeek]"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[DayOfWeek]"
+                      name="DayOfWeek"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[DayNameOfWeek]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[DayNameOfWeek]"
+                      length="255"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[DayNameOfWeek]"
+                      name="DayNameOfWeek"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[DayOfMonth]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[DayOfMonth]"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[DayOfMonth]"
+                      name="DayOfMonth"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[DayOfYear]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[DayOfYear]"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[DayOfYear]"
+                      name="DayOfYear"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[MonthName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[MonthName]"
+                      length="255"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[MonthName]"
+                      name="MonthName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[CalendarQuarter]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[CalendarQuarter]"
+                      length="255"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[CalendarQuarter]"
+                      name="CalendarQuarter"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[CalendarYear]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[CalendarYear]"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[CalendarYear]"
+                      name="CalendarYear"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[asi_date]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[asi_date]"
+                      length="255"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[asi_date]"
+                      name="asi_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[sql_date]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[sql_date]"
+                      length="255"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[sql_date]"
+                      name="sql_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[julian_date]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[julian_date]"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[julian_date]"
+                      name="julian_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Week_number]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Week_number]"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Week_number]"
+                      name="Week_number"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Month]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Month]"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Month]"
+                      name="Month"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[short_month_name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[short_month_name]"
+                      length="255"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[short_month_name]"
+                      name="short_month_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[fiscal_week]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[fiscal_week]"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[fiscal_week]"
+                      name="fiscal_week"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[fiscal_period]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[fiscal_period]"
+                      length="255"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[fiscal_period]"
+                      name="fiscal_period"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[fiscal_quarter]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[fiscal_quarter]"
+                      length="255"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[fiscal_quarter]"
+                      name="fiscal_quarter"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[fiscal_year]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[fiscal_year]"
+                      length="255"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[fiscal_year]"
+                      name="fiscal_year"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[week_day]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[week_day]"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[week_day]"
+                      name="week_day"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[us_holiday]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[us_holiday]"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[us_holiday]"
+                      name="us_holiday"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[uk_holiday]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[uk_holiday]"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[uk_holiday]"
+                      name="uk_holiday"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[month_end]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[month_end]"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[month_end]"
+                      name="month_end"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[period_end]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[period_end]"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[period_end]"
+                      name="period_end"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[short_day]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[short_day]"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[short_day]"
+                      name="short_day"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[DateKey]"
+                      dataType="wstr"
+                      length="255"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[FullDate]"
+                      dataType="date"
+                      name="FullDate" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[DayOfWeek]"
+                      dataType="r8"
+                      name="DayOfWeek" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[DayNameOfWeek]"
+                      dataType="wstr"
+                      length="255"
+                      name="DayNameOfWeek" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[DayOfMonth]"
+                      dataType="r8"
+                      name="DayOfMonth" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[DayOfYear]"
+                      dataType="r8"
+                      name="DayOfYear" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[MonthName]"
+                      dataType="wstr"
+                      length="255"
+                      name="MonthName" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[CalendarQuarter]"
+                      dataType="wstr"
+                      length="255"
+                      name="CalendarQuarter" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[CalendarYear]"
+                      dataType="r8"
+                      name="CalendarYear" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[asi_date]"
+                      dataType="wstr"
+                      length="255"
+                      name="asi_date" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[sql_date]"
+                      dataType="wstr"
+                      length="255"
+                      name="sql_date" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[julian_date]"
+                      dataType="r8"
+                      name="julian_date" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Week_number]"
+                      dataType="r8"
+                      name="Week_number" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Month]"
+                      dataType="r8"
+                      name="Month" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[short_month_name]"
+                      dataType="wstr"
+                      length="255"
+                      name="short_month_name" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[fiscal_week]"
+                      dataType="r8"
+                      name="fiscal_week" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[fiscal_period]"
+                      dataType="wstr"
+                      length="255"
+                      name="fiscal_period" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[fiscal_quarter]"
+                      dataType="wstr"
+                      length="255"
+                      name="fiscal_quarter" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[fiscal_year]"
+                      dataType="wstr"
+                      length="255"
+                      name="fiscal_year" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[week_day]"
+                      dataType="r8"
+                      name="week_day" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[us_holiday]"
+                      dataType="r8"
+                      name="us_holiday" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[uk_holiday]"
+                      dataType="r8"
+                      name="uk_holiday" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[month_end]"
+                      dataType="r8"
+                      name="month_end" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[period_end]"
+                      dataType="r8"
+                      name="period_end" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[short_day]"
+                      dataType="r8"
+                      name="short_day" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[DateKey]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[DateKey]"
+                      name="DateKey" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[FullDate]"
+                      dataType="date"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[FullDate]"
+                      name="FullDate" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[asi_date]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[asi_date]"
+                      name="asi_date" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[sql_date]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[sql_date]"
+                      name="sql_date" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[julian_date]"
+                      dataType="r8"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[julian_date]"
+                      name="julian_date" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[DayOfWeek]"
+                      dataType="r8"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[DayOfWeek]"
+                      name="DayOfWeek" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[DayNameOfWeek]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[DayNameOfWeek]"
+                      name="DayNameOfWeek" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[DayOfMonth]"
+                      dataType="r8"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[DayOfMonth]"
+                      name="DayOfMonth" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[DayOfYear]"
+                      dataType="r8"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[DayOfYear]"
+                      name="DayOfYear" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Week_number]"
+                      dataType="r8"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Week_number]"
+                      name="Week_number" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Month]"
+                      dataType="r8"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Month]"
+                      name="Month" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[MonthName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[MonthName]"
+                      name="MonthName" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[short_month_name]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[short_month_name]"
+                      name="short_month_name" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[CalendarQuarter]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[CalendarQuarter]"
+                      name="CalendarQuarter" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[CalendarYear]"
+                      dataType="r8"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[CalendarYear]"
+                      name="CalendarYear" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[fiscal_week]"
+                      dataType="r8"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[fiscal_week]"
+                      name="fiscal_week" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[fiscal_period]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[fiscal_period]"
+                      name="fiscal_period" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[fiscal_quarter]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[fiscal_quarter]"
+                      name="fiscal_quarter" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[fiscal_year]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[fiscal_year]"
+                      name="fiscal_year" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[week_day]"
+                      dataType="r8"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[week_day]"
+                      name="week_day" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[us_holiday]"
+                      dataType="r8"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[us_holiday]"
+                      name="us_holiday" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[uk_holiday]"
+                      dataType="r8"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[uk_holiday]"
+                      name="uk_holiday" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[month_end]"
+                      dataType="r8"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[month_end]"
+                      name="month_end" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[period_end]"
+                      dataType="r8"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[period_end]"
+                      name="period_end" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[short_day]"
+                      dataType="r8"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[short_day]"
+                      name="short_day" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Dim Date Data Flow Task\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[dim_date]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Dim Date Data Flow Task\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MQLAPTOP\SQLEXPRESS.DDS]"
+                  connectionManagerRefId="Package.ConnectionManagers[MQLAPTOP\SQLEXPRESS.DDS]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DayOfWeek]"
+                      cachedDataType="r8"
+                      cachedName="DayOfWeek"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[day_of_the_week]"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[DayOfWeek]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DayOfYear]"
+                      cachedDataType="r8"
+                      cachedName="DayOfYear"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[day_of_the_year]"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[DayOfYear]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of FullDate]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Copy of FullDate"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[date]"
+                      lineageId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of FullDate]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[sql_date]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="sql_date"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sql_date]"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[sql_date]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[julian_date]"
+                      cachedDataType="r8"
+                      cachedName="julian_date"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[julian_date]"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[julian_date]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DayOfMonth]"
+                      cachedDataType="r8"
+                      cachedName="DayOfMonth"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[day]"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[DayOfMonth]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Week_number]"
+                      cachedDataType="r8"
+                      cachedName="Week_number"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[week_number]"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Week_number]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Month]"
+                      cachedDataType="r8"
+                      cachedName="Month"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[month]"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Month]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CalendarYear]"
+                      cachedDataType="r8"
+                      cachedName="CalendarYear"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[year]"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[CalendarYear]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[fiscal_week]"
+                      cachedDataType="r8"
+                      cachedName="fiscal_week"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[fiscal_week]"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[fiscal_week]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[week_day]"
+                      cachedDataType="r8"
+                      cachedName="week_day"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[week_day]"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[week_day]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[us_holiday]"
+                      cachedDataType="r8"
+                      cachedName="us_holiday"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[us_holiday]"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[us_holiday]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[uk_holiday]"
+                      cachedDataType="r8"
+                      cachedName="uk_holiday"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[uk_holiday]"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[uk_holiday]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[month_end]"
+                      cachedDataType="r8"
+                      cachedName="month_end"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[month_end]"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[month_end]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[period_end]"
+                      cachedDataType="r8"
+                      cachedName="period_end"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[period_end]"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[period_end]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[short_day]"
+                      cachedDataType="r8"
+                      cachedName="short_day"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[short_day]"
+                      lineageId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[short_day]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of asi_date]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Copy of asi_date"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[system_date]"
+                      lineageId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of asi_date]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of DayNameOfWeek]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="9"
+                      cachedName="Copy of DayNameOfWeek"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[day_name]"
+                      lineageId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DayNameOfWeek]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of MonthName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="9"
+                      cachedName="Copy of MonthName"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[month_name]"
+                      lineageId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of MonthName]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of short_month_name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="Copy of short_month_name"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[short_month_name]"
+                      lineageId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of short_month_name]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of fiscal_period]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Copy of fiscal_period"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[fiscal_period]"
+                      lineageId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of fiscal_period]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of fiscal_quarter]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="Copy of fiscal_quarter"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[fiscal_quarter]"
+                      lineageId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of fiscal_quarter]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of fiscal_year]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="6"
+                      cachedName="Copy of fiscal_year"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[fiscal_year]"
+                      lineageId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of fiscal_year]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of CalendarQuarter]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="Copy of CalendarQuarter"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[quarter]"
+                      lineageId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CalendarQuarter]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[source_system_code]"
+                      cachedDataType="ui1"
+                      cachedName="source_system_code"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[source_system_code]"
+                      lineageId="Package\Dim Date Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[source_system_code]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[create_timestamp]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="create_timestamp"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[create_timestamp]"
+                      lineageId="Package\Dim Date Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[create_timestamp]" />
+                    <inputColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[update_timestamp]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="update_timestamp"
+                      externalMetadataColumnId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[update_timestamp]"
+                      lineageId="Package\Dim Date Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[update_timestamp]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[date_key]"
+                      dataType="i4"
+                      name="date_key" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="date" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[system_date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="system_date" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sql_date]"
+                      dataType="dbTimeStamp"
+                      name="sql_date" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[julian_date]"
+                      dataType="i4"
+                      name="julian_date" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[day]"
+                      dataType="ui1"
+                      name="day" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[day_of_the_week]"
+                      dataType="ui1"
+                      name="day_of_the_week" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[day_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="9"
+                      name="day_name" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[day_of_the_year]"
+                      dataType="i2"
+                      name="day_of_the_year" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[week_number]"
+                      dataType="ui1"
+                      name="week_number" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[month]"
+                      dataType="ui1"
+                      name="month" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[month_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="9"
+                      name="month_name" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[short_month_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="short_month_name" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[quarter]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="quarter" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[year]"
+                      dataType="i2"
+                      name="year" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[fiscal_week]"
+                      dataType="ui1"
+                      name="fiscal_week" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[fiscal_period]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="fiscal_period" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[fiscal_quarter]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="fiscal_quarter" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[fiscal_year]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="fiscal_year" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[week_day]"
+                      dataType="ui1"
+                      name="week_day" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[us_holiday]"
+                      dataType="ui1"
+                      name="us_holiday" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[uk_holiday]"
+                      dataType="ui1"
+                      name="uk_holiday" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[month_end]"
+                      dataType="ui1"
+                      name="month_end" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[period_end]"
+                      dataType="ui1"
+                      name="period_end" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[short_day]"
+                      dataType="ui1"
+                      name="short_day" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[source_system_code]"
+                      dataType="ui1"
+                      name="source_system_code" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[create_timestamp]"
+                      dataType="dbTimeStamp"
+                      name="create_timestamp" />
+                    <externalMetadataColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[update_timestamp]"
+                      dataType="dbTimeStamp"
+                      name="update_timestamp" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Dim Date Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Dim Date Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Dim Date Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Dim Date Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Dim Date Data Flow Task.Paths[Data Conversion Output]"
+              endId="Package\Dim Date Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+              name="Data Conversion Output"
+              startId="Package\Dim Date Data Flow Task\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Dim Date Data Flow Task.Paths[Derived Column Output]"
+              endId="Package\Dim Date Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\Dim Date Data Flow Task\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Dim Date Data Flow Task.Paths[Excel Source Output]"
+              endId="Package\Dim Date Data Flow Task\Data Conversion.Inputs[Data Conversion Input]"
+              name="Excel Source Output"
+              startId="Package\Dim Date Data Flow Task\Excel Source.Outputs[Excel Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="196.8,41.6"
+          Id="Package\Dim Date Data Flow Task"
+          TopLeft="275.666655712658,26.520000210762" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Dim Date Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="140,41.6"
+          Id="Package\Dim Date Data Flow Task\Excel Source"
+          TopLeft="607.766643354629,28.9000001859665" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\Dim Date Data Flow Task\Derived Column"
+          TopLeft="601.366643354629,232.100000185966" />
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\Dim Date Data Flow Task\OLE DB Destination"
+          TopLeft="592.166643354629,333.700000185966" />
+        <NodeLayout
+          Size="156,41.6"
+          Id="Package\Dim Date Data Flow Task\Data Conversion"
+          TopLeft="599.766643354629,130.500000185966" />
+        <EdgeLayout
+          Id="Package\Dim Date Data Flow Task.Paths[Excel Source Output]"
+          TopLeft="677.766643354629,70.5000001859665">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999995"
+              Start="0,0"
+              End="0,52.4999999999995">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999995" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Dim Date Data Flow Task.Paths[Derived Column Output]"
+          TopLeft="677.766643354629,273.700000185966">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Dim Date Data Flow Task.Paths[Data Conversion Output]"
+          TopLeft="677.766643354629,172.100000185966">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dim Date Data Flow Task\Excel Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dim Date Data Flow Task\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
